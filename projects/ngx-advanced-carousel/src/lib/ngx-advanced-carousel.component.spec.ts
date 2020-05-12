@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LeoCarouselComponent } from './carousel.component';
+import { NgxAdvancedCarouselComponent } from './ngx-advanced-carousel.component';
 
-describe('LeoCarouselComponent', () => {
-  let component: LeoCarouselComponent;
-  let fixture: ComponentFixture<LeoCarouselComponent>;
+describe('NgxAdvancedCarouselComponent', () => {
+  let component: NgxAdvancedCarouselComponent;
+  let fixture: ComponentFixture<NgxAdvancedCarouselComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LeoCarouselComponent],
+      declarations: [NgxAdvancedCarouselComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LeoCarouselComponent);
+    fixture = TestBed.createComponent(NgxAdvancedCarouselComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
