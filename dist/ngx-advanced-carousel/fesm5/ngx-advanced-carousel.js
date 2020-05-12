@@ -61,7 +61,7 @@ var NgxAdvancedCarouselItemDirective = /** @class */ (function () {
     }
     NgxAdvancedCarouselItemDirective.decorators = [
         { type: Directive, args: [{
-                    selector: '[ngx-carousel-item]',
+                    selector: '[ngx-advanced-carousel-item]',
                 },] }
     ];
     /** @nocollapse */
@@ -881,10 +881,10 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
         if (isInit) {
             // remain one elm height
             this.initData(this._infineDataCount);
-            this._renderer.addClass(this.containerElm, 'leo-carousel-display-nowrap');
+            this._renderer.addClass(this.containerElm, 'ngx-advanced-carousel-display-nowrap');
         }
         this.elmWidth = this.rootElmWidth / (this._showNum / this.gridBy.col);
-        this._renderer.removeClass(this.containerElm, 'leo-carousel-display-nowrap');
+        this._renderer.removeClass(this.containerElm, 'ngx-advanced-carousel-display-nowrap');
         this.containerElmWidth =
             (this.elmWidth / this.gridBy.col) * this.elms.length;
         this._renderer.setStyle(this.containerElm, 'position', 'relative');
