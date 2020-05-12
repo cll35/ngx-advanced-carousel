@@ -1,0 +1,96 @@
+<div #containerElm class="carousel">
+  <!-- main content -->
+  <div leo-carousel-container class="content">
+    <div
+      class="item cursor-pointer visible_important"
+      leo-carousel-item
+      *ngFor="let _x of data; let i = index; trackBy: trackByFcn"
+    >
+      <div
+        class="slide d-flex"
+        [ngClass]="gridBy.col != 1 || gridBy.row != 1 ? 'flex-wrap' : ''"
+        #viewArea
+        *ngIf="i % (scrollNum * gridBy.row) === 0"
+      >
+        <ng-container
+          *ngFor="
+            let item of data | slice: i:i + scrollNum * gridBy.row;
+            let j = index
+          "
+        >
+          <ng-container
+            *ngTemplateOutlet="
+              carouselItemTemplate;
+              context: {
+                $implicit: item
+              }
+            "
+          >
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <!-- left -->
+  <div
+    #prev
+    *ngIf="contentPrev"
+    class="direction left"
+    [ngClass]="[
+      showButtonsMethod !== 'auto-hide' ||
+      (showButtonsMethod === 'auto-hide' && currentIndex > 0)
+        ? 'visible'
+        : 'invisible',
+      showButtonsMethod !== 'auto-disable' ||
+      (showButtonsMethod === 'auto-disable' && currentIndex > 0)
+        ? ''
+        : 'disabled'
+    ]"
+  >
+    <ng-container *ngTemplateOutlet="contentPrev"></ng-container>
+  </div>
+  <!--  right -->
+  <div
+    #next
+    *ngIf="contentNext"
+    class="direction right"
+    [ngClass]="[
+      showButtonsMethod !== 'auto-hide' ||
+      (showButtonsMethod === 'auto-hide' && realIndex < data.length)
+        ? 'visible'
+        : 'invisible',
+      showButtonsMethod !== 'auto-disable' ||
+      (showButtonsMethod === 'auto-disable' && realIndex < data.length)
+        ? ''
+        : 'disabled'
+    ]"
+  >
+    <ng-container *ngTemplateOutlet="contentNext"></ng-container>
+  </div>
+  <!-- indicators -->
+  <ul class="indicators" *ngIf="dotElm">
+    <li *ngFor="let dot of itemElms; let i = index" (click)="currentIndex = i">
+      <ng-container
+        *ngTemplateOutlet="
+          dotElm;
+          context: {
+            $implicit: {
+              index: i,
+              currentIndex: currentIndex
+            }
+          }
+        "
+      >
+      </ng-container>
+    </li>
+  </ul>
+  <!-- progress -->
+  <div *ngIf="progressElm && autoplay" #progress>
+    <ng-container *ngTemplateOutlet="progressElm"> </ng-container>
+  </div>
+
+  <div class="mask" *ngIf="grabbing">
+    <ng-container *ngIf="leaveObs$ | async"></ng-container>
+  </div>
+</div>

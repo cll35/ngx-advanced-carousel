@@ -1,0 +1,119 @@
+
+$transition_time:0.5s;
+$transition_time:0.5s;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.leo-carousel-display-nowrap {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  overflow: hidden !important;
+}
+
+.carousel {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  .transition {
+    transition: all $transition_time ease-in-out;
+  }
+
+  ul.indicators {
+    bottom: 1rem;
+    left: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+
+    li {
+      cursor: pointer;
+      display: inline-block;
+      padding: 0.5rem;
+      position: relative;
+    }
+  }
+
+  .direction {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+
+    &.left {
+      left: 0;
+    }
+
+    &.right {
+      position: absolute;
+      right: 0;
+    }
+
+    &.disabled {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  }
+
+  .content {
+    display: flex;
+
+    .item {
+      display: block;
+      // fade
+      opacity: 0;
+      width: 100%;
+
+      // using delay to prevent left change show error
+      &.fade_animation {
+        transition: opacity 0.295s linear $transition_time;
+      }
+
+      &.fade_animation_0 {
+        transition: opacity 0.295s linear;
+      }
+
+      &.visible {
+        opacity: 1;
+      }
+
+      &:last-child,
+      &:first-child {
+        opacity: 0;
+      }
+
+      &.visible_important {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.grab {
+  cursor: grab;
+}
+
+.grabbing {
+  cursor: grabbing;
+}
+
+.mask {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  // using for debug
+  // background: rgba(200, 0, 0, 0.5)
+}

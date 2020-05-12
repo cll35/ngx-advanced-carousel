@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-advanced-carousel": [
+        "dist/ngx-advanced-carousel"
+      ],
+      "ngx-advanced-carousel/*": [
+        "dist/ngx-advanced-carousel/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
