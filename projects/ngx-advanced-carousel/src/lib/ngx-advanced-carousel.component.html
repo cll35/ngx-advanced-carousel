@@ -7,7 +7,7 @@
       *ngFor="let _x of data; let i = index; trackBy: trackByFcn"
     >
       <div
-        class="slide d-flex"
+        class="slide"
         [ngClass]="gridBy.col != 1 || gridBy.row != 1 ? 'flex-wrap' : ''"
         #viewArea
         *ngIf="i % (scrollNum * gridBy.row) === 0"

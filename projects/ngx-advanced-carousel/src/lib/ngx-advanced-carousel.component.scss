@@ -20,6 +20,11 @@ $transition_time:0.5s;
   position: relative;
   width: 100%;
 
+  .slide{
+    display: flex;
+    flex-direction: row;
+    
+  }
   .transition {
     transition: all $transition_time ease-in-out;
   }
