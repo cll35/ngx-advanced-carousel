@@ -4,7 +4,7 @@
     (global = global || self, factory(global['ngx-advanced-carousel'] = {}, global['resize-observer-polyfill'], global.rxjs, global.rxjs.operators, global.ng.core, global.ng.common, global.ng.forms, global.hammerjs));
 }(this, (function (exports, ResizeObserver, rxjs, operators, core, common, forms, hammerjs) { 'use strict';
 
-    ResizeObserver = ResizeObserver && ResizeObserver.hasOwnProperty('default') ? ResizeObserver['default'] : ResizeObserver;
+    ResizeObserver = ResizeObserver && Object.prototype.hasOwnProperty.call(ResizeObserver, 'default') ? ResizeObserver['default'] : ResizeObserver;
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -221,72 +221,164 @@
     }
 
     /**
-     * @fileoverview added by tsickle
-     * Generated from: lib/rxjs.observable.resize.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    /**
      * An observable creator for element resize.
-     * @param {?} elm the watch element.
-     * @param {?} cb when resize complete, call back function.
-     * @param {?=} time resize emit time, default is 200
-     * @return {?}
+     * @param elm the watch element.
+     * @param cb when resize complete, call back function.
+     * @param time resize emit time, default is 200
      */
     function resizeObservable(elm, cb, time) {
         if (time === void 0) { time = 200; }
-        /** @type {?} */
         var elmObserve$;
-        return new rxjs.Observable((/**
-         * @param {?} observer
-         * @return {?}
-         */
-        function (observer) {
-            elmObserve$ = new ResizeObserver((/**
-             * @param {?} entries
-             * @param {?} obs
-             * @return {?}
-             */
-            function (entries, obs) {
+        return new rxjs.Observable(function (observer) {
+            elmObserve$ = new ResizeObserver(function (entries, obs) {
                 observer.next(elmObserve$);
-            }));
+            });
             elmObserve$.observe(elm);
-        })).pipe(operators.debounceTime(time), operators.tap((/**
-         * @return {?}
-         */
-        function () {
+        }).pipe(operators.debounceTime(time), operators.tap(function () {
             cb();
-        })), operators.finalize((/**
-         * @return {?}
-         */
-        function () {
+        }), operators.finalize(function () {
             elmObserve$.unobserve(elm);
             elmObserve$.disconnect();
-        })));
+        }));
     }
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: lib/ngx-advanced-carousel-item.directive.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var NgxAdvancedCarouselItemDirective = /** @class */ (function () {
         function NgxAdvancedCarouselItemDirective() {
         }
-        NgxAdvancedCarouselItemDirective.decorators = [
-            { type: core.Directive, args: [{
-                        selector: '[ngx-advanced-carousel-item]',
-                    },] }
-        ];
-        /** @nocollapse */
-        NgxAdvancedCarouselItemDirective.ctorParameters = function () { return []; };
+        /** @nocollapse */ NgxAdvancedCarouselItemDirective.ɵfac = function NgxAdvancedCarouselItemDirective_Factory(t) { return new (t || NgxAdvancedCarouselItemDirective)(); };
+        /** @nocollapse */ NgxAdvancedCarouselItemDirective.ɵdir = core.ɵɵdefineDirective({ type: NgxAdvancedCarouselItemDirective, selectors: [["", "ngx-advanced-carousel-item", ""]] });
         return NgxAdvancedCarouselItemDirective;
     }());
+    /*@__PURE__*/ (function () { core.ɵsetClassMetadata(NgxAdvancedCarouselItemDirective, [{
+            type: core.Directive,
+            args: [{
+                    selector: '[ngx-advanced-carousel-item]',
+                }]
+        }], function () { return []; }, null); })();
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: lib/ngx-advanced-carousel.component.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
+    var _c0 = ["carouselPrev"];
+    var _c1 = ["carouselNext"];
+    var _c2 = ["carouselDot"];
+    var _c3 = ["carouselItemTemplate"];
+    var _c4 = ["carouselProgress"];
+    var _c5 = ["containerElm"];
+    var _c6 = ["prev"];
+    var _c7 = ["next"];
+    var _c8 = ["progress"];
+    var _c9 = ["viewArea"];
+    function NgxAdvancedCarouselComponent_div_3_div_1_ng_container_2_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainer(0);
+    } }
+    var _c10 = function (a0) { return { $implicit: a0 }; };
+    function NgxAdvancedCarouselComponent_div_3_div_1_ng_container_2_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵtemplate(1, NgxAdvancedCarouselComponent_div_3_div_1_ng_container_2_ng_container_1_Template, 1, 0, "ng-container", 14);
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var item_r12 = ctx.$implicit;
+        var ctx_r11 = core.ɵɵnextContext(3);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngTemplateOutlet", ctx_r11.carouselItemTemplate)("ngTemplateOutletContext", core.ɵɵpureFunction1(2, _c10, item_r12));
+    } }
+    function NgxAdvancedCarouselComponent_div_3_div_1_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementStart(0, "div", 11, 12);
+        core.ɵɵtemplate(2, NgxAdvancedCarouselComponent_div_3_div_1_ng_container_2_Template, 2, 4, "ng-container", 13);
+        core.ɵɵpipe(3, "slice");
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var i_r8 = core.ɵɵnextContext().index;
+        var ctx_r9 = core.ɵɵnextContext();
+        core.ɵɵproperty("ngClass", ctx_r9.gridBy.col != 1 || ctx_r9.gridBy.row != 1 ? "flex-wrap" : "");
+        core.ɵɵadvance(2);
+        core.ɵɵproperty("ngForOf", core.ɵɵpipeBind3(3, 2, ctx_r9.data, i_r8, i_r8 + ctx_r9.scrollNum * ctx_r9.gridBy.row));
+    } }
+    function NgxAdvancedCarouselComponent_div_3_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementStart(0, "div", 9);
+        core.ɵɵtemplate(1, NgxAdvancedCarouselComponent_div_3_div_1_Template, 4, 6, "div", 10);
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var i_r8 = ctx.index;
+        var ctx_r1 = core.ɵɵnextContext();
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", i_r8 % (ctx_r1.scrollNum * ctx_r1.gridBy.row) === 0);
+    } }
+    function NgxAdvancedCarouselComponent_div_4_ng_container_2_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainer(0);
+    } }
+    var _c11 = function (a0, a1) { return [a0, a1]; };
+    function NgxAdvancedCarouselComponent_div_4_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementStart(0, "div", 15, 16);
+        core.ɵɵtemplate(2, NgxAdvancedCarouselComponent_div_4_ng_container_2_Template, 1, 0, "ng-container", 17);
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var ctx_r2 = core.ɵɵnextContext();
+        core.ɵɵproperty("ngClass", core.ɵɵpureFunction2(2, _c11, ctx_r2.showButtonsMethod !== "auto-hide" || ctx_r2.showButtonsMethod === "auto-hide" && ctx_r2.currentIndex > 0 ? "visible" : "invisible", ctx_r2.showButtonsMethod !== "auto-disable" || ctx_r2.showButtonsMethod === "auto-disable" && ctx_r2.currentIndex > 0 ? "" : "disabled"));
+        core.ɵɵadvance(2);
+        core.ɵɵproperty("ngTemplateOutlet", ctx_r2.contentPrev);
+    } }
+    function NgxAdvancedCarouselComponent_div_5_ng_container_2_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainer(0);
+    } }
+    function NgxAdvancedCarouselComponent_div_5_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementStart(0, "div", 18, 19);
+        core.ɵɵtemplate(2, NgxAdvancedCarouselComponent_div_5_ng_container_2_Template, 1, 0, "ng-container", 17);
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var ctx_r3 = core.ɵɵnextContext();
+        core.ɵɵproperty("ngClass", core.ɵɵpureFunction2(2, _c11, ctx_r3.showButtonsMethod !== "auto-hide" || ctx_r3.showButtonsMethod === "auto-hide" && ctx_r3.realIndex < ctx_r3.data.length ? "visible" : "invisible", ctx_r3.showButtonsMethod !== "auto-disable" || ctx_r3.showButtonsMethod === "auto-disable" && ctx_r3.realIndex < ctx_r3.data.length ? "" : "disabled"));
+        core.ɵɵadvance(2);
+        core.ɵɵproperty("ngTemplateOutlet", ctx_r3.contentNext);
+    } }
+    function NgxAdvancedCarouselComponent_ul_6_li_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainer(0);
+    } }
+    var _c12 = function (a0, a1) { return { index: a0, currentIndex: a1 }; };
+    function NgxAdvancedCarouselComponent_ul_6_li_1_Template(rf, ctx) { if (rf & 1) {
+        var _r25 = core.ɵɵgetCurrentView();
+        core.ɵɵelementStart(0, "li", 22);
+        core.ɵɵlistener("click", function NgxAdvancedCarouselComponent_ul_6_li_1_Template_li_click_0_listener() { core.ɵɵrestoreView(_r25); var i_r22 = ctx.index; var ctx_r24 = core.ɵɵnextContext(2); return ctx_r24.currentIndex = i_r22; });
+        core.ɵɵtemplate(1, NgxAdvancedCarouselComponent_ul_6_li_1_ng_container_1_Template, 1, 0, "ng-container", 14);
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var i_r22 = ctx.index;
+        var ctx_r20 = core.ɵɵnextContext(2);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngTemplateOutlet", ctx_r20.dotElm)("ngTemplateOutletContext", core.ɵɵpureFunction1(5, _c10, core.ɵɵpureFunction2(2, _c12, i_r22, ctx_r20.currentIndex)));
+    } }
+    function NgxAdvancedCarouselComponent_ul_6_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementStart(0, "ul", 20);
+        core.ɵɵtemplate(1, NgxAdvancedCarouselComponent_ul_6_li_1_Template, 2, 7, "li", 21);
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var ctx_r4 = core.ɵɵnextContext();
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngForOf", ctx_r4.itemElms);
+    } }
+    function NgxAdvancedCarouselComponent_div_7_ng_container_2_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainer(0);
+    } }
+    function NgxAdvancedCarouselComponent_div_7_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementStart(0, "div", null, 23);
+        core.ɵɵtemplate(2, NgxAdvancedCarouselComponent_div_7_ng_container_2_Template, 1, 0, "ng-container", 17);
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var ctx_r5 = core.ɵɵnextContext();
+        core.ɵɵadvance(2);
+        core.ɵɵproperty("ngTemplateOutlet", ctx_r5.progressElm);
+    } }
+    function NgxAdvancedCarouselComponent_div_8_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainer(0);
+    } }
+    function NgxAdvancedCarouselComponent_div_8_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementStart(0, "div", 24);
+        core.ɵɵtemplate(1, NgxAdvancedCarouselComponent_div_8_ng_container_1_Template, 1, 0, "ng-container", 7);
+        core.ɵɵpipe(2, "async");
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var ctx_r6 = core.ɵɵnextContext();
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", core.ɵɵpipeBind1(2, 1, ctx_r6.leaveObs$));
+    } }
     var NgxAdvancedCarouselComponent = /** @class */ (function () {
         function NgxAdvancedCarouselComponent(platformId, _document, _renderer, _zone, _cd) {
             var _this = this;
@@ -296,16 +388,11 @@
             this._zone = _zone;
             this._cd = _cd;
             this.mappedData = new core.EventEmitter();
-            /**
-             * when infinite is true, the animation time with item, default is 400.
-             */
+            /** when infinite is true, the animation time with item, default is 400. */
             this.aniTime = 400;
-            /**
-             * this class will add in #containerElm when model change
-             */
+            /** this class will add in #containerElm when model change */
             this.aniClass = 'transition';
-            /**
-             * this class will add when carousel auto play,
+            /** this class will add when carousel auto play,
              * this default autoplay animation is same as aniClass
              */
             this.aniClassAuto = this.aniClass;
@@ -318,9 +405,7 @@
              * default is `0.15`
              */
             this.panBoundary = 0.15;
-            /**
-             * when show-num is bigger than 1, the first item align, defaulte is `center`
-             */
+            /** when show-num is bigger than 1, the first item align, defaulte is `center` */
             this.align = 'center';
             /**
              * disable when drag occur the child element will follow touch point.
@@ -332,28 +417,18 @@
              * the event binding state for stop auto play when mourse moveover
              */
             this.mourseEnable = false;
-            /**
-             * each auto play between time
-             */
+            /** each auto play between time */
             this.delay = 8000;
-            /**
-             * auto play direction, default is `right`.
-             */
+            /** auto play direction, default is `right`. */
             this.direction = 'right';
-            /**
-             * how many number with each scroll, default is `1`.
-             */
+            /** how many number with each scroll, default is `1`. */
             this.scrollNum = 1;
-            /**
-             * Could user scroll many item once, simulate with scrollbar, default is `false`
-             */
+            /** Could user scroll many item once, simulate with scrollbar, default is `false` */
             this.isDragMany = false;
-            /**
-             * Minimal velocity required before recognizing, unit is in px per ms, default `0.3`
-             */
+            /** Minimal velocity required before recognizing, unit is in px per ms, default `0.3` */
             this.swipeVelocity = 0.3;
             /**
-             * switch show number with custom logic like css \@media (min-width: `number`px)
+             * switch show number with custom logic like css @media (min-width: `number`px)
              */
             this.breakpoint = [];
             this.screenSizeMap = {
@@ -365,15 +440,11 @@
                 sm: 576,
                 xs: 0,
             };
-            this.leaveObs$ = rxjs.merge(rxjs.fromEvent(this._document, 'mouseup'), rxjs.fromEvent(this._document, 'touchend')).pipe(operators.tap((/**
-             * @param {?} e
-             * @return {?}
-             */
-            function (e) {
+            this.leaveObs$ = rxjs.merge(rxjs.fromEvent(this._document, 'mouseup'), rxjs.fromEvent(this._document, 'touchend')).pipe(operators.tap(function (e) {
                 _this.grabbing = false;
                 e.stopPropagation();
                 e.preventDefault();
-            })));
+            }));
             this.isFromAuto = true;
             this.isAutoNum = false;
             this.mouseOnContainer = false;
@@ -399,28 +470,14 @@
             this.initialIndex = 0;
             this.orginalData = [];
             this._infineDataCount = 0;
-            this.onChange = (/**
-             * @param {?} _
-             * @return {?}
-             */
-            function (_) { });
-            this.onTouched = (/**
-             * @return {?}
-             */
-            function () { });
+            this.onChange = function (_) { };
+            this.onTouched = function () { };
         }
         Object.defineProperty(NgxAdvancedCarouselComponent.prototype, "data", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._data;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 this._data = value;
             },
             enumerable: true,
@@ -428,18 +485,10 @@
         });
         Object.defineProperty(NgxAdvancedCarouselComponent.prototype, "disableDrag", {
             /** disable drag event with touch and mouse pan moving, default is `false` */
-            get: /**
-             * disable drag event with touch and mouse pan moving, default is `false`
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._disableDrag;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 if (this.rootElm) {
                     if (this._disableDrag !== value) {
                         if (value) {
@@ -457,18 +506,10 @@
         });
         Object.defineProperty(NgxAdvancedCarouselComponent.prototype, "infinite", {
             /** is the carousel can move infinite */
-            get: /**
-             * is the carousel can move infinite
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._infinite;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 this._infinite = value;
                 /* this.infiniteElmRefs.forEach((ref) => {
                   this.addStyle(ref.rootNodes[0], {
@@ -481,25 +522,14 @@
         });
         Object.defineProperty(NgxAdvancedCarouselComponent.prototype, "speed", {
             /** auto play speed */
-            get: /**
-             * auto play speed
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this.speedChange.value;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 var _this = this;
-                this._zone.runOutsideAngular((/**
-                 * @return {?}
-                 */
-                function () {
+                this._zone.runOutsideAngular(function () {
                     _this.speedChange.next(value);
-                }));
+                });
             },
             enumerable: true,
             configurable: true
@@ -509,19 +539,10 @@
              * how many number items to show once, default is `1`
              * set `auto` to using `[breakpoint]` set value.
              */
-            get: /**
-             * how many number items to show once, default is `1`
-             * set `auto` to using `[breakpoint]` set value.
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._showNum;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 if (value === 'auto') {
                     this.isAutoNum = true;
                 }
@@ -538,29 +559,18 @@
         });
         Object.defineProperty(NgxAdvancedCarouselComponent.prototype, "autoplay", {
             /** carousel auto play confing */
-            get: /**
-             * carousel auto play confing
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._autoplay;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 var _this = this;
                 if (common.isPlatformBrowser(this.platformId)) {
                     if (this.elms) {
                         this.progressWidth = 0;
                         if (value) {
-                            this._zone.runOutsideAngular((/**
-                             * @return {?}
-                             */
-                            function () {
+                            this._zone.runOutsideAngular(function () {
                                 _this.doNextSub$ = _this.doNext.subscribe();
-                            }));
+                            });
                         }
                         else {
                             if (this.doNextSub$) {
@@ -579,17 +589,10 @@
             configurable: true
         });
         Object.defineProperty(NgxAdvancedCarouselComponent.prototype, "currentIndex", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._currentIndex;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 var _this = this;
                 // if now index if not equale to save index, do someting
                 if (this.currentIndex !== value) {
@@ -603,13 +606,10 @@
                     this._currentIndex = value;
                     if (this.elms) {
                         if (this.autoplay && !this.isFromAuto) {
-                            this._zone.runOutsideAngular((/**
-                             * @return {?}
-                             */
-                            function () {
+                            this._zone.runOutsideAngular(function () {
                                 _this.stopEvent.next();
                                 _this.callRestart();
-                            }));
+                            });
                         }
                         this.realIndex =
                             this.gridBy.col * this.gridBy.row > 1
@@ -649,20 +649,14 @@
                                 this._currentIndex =
                                     this.currentIndex - this.data.length + this._showNum * 4;
                             }
-                            this._zone.runOutsideAngular((/**
-                             * @return {?}
-                             */
-                            function () {
+                            this._zone.runOutsideAngular(function () {
                                 rxjs.timer(_this.aniTime + 100)
-                                    .pipe(operators.switchMap((/**
-                                 * @return {?}
-                                 */
-                                function () {
+                                    .pipe(operators.switchMap(function () {
                                     _this.drawView(_this.currentIndex, false);
                                     return rxjs.of(null);
-                                })), operators.take(1))
+                                }), operators.take(1))
                                     .subscribe();
-                            }));
+                            });
                         }
                         /* if (this.realIndex > this.elms.length) {
                           const count = (this.realIndex - this.elms.length) % this._showNum;
@@ -680,13 +674,10 @@
                     }
                     if (0 <= this.currentIndex &&
                         this.currentIndex <= this.itemElms.length - 1) {
-                        this._zone.run((/**
-                         * @return {?}
-                         */
-                        function () {
+                        this._zone.run(function () {
                             _this.onChange(_this.currentIndex);
                             _this._cd.detectChanges();
-                        }));
+                        });
                     }
                 }
                 this.isFromAuto = false;
@@ -695,43 +686,26 @@
             configurable: true
         });
         Object.defineProperty(NgxAdvancedCarouselComponent.prototype, "progressWidth", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._porgressWidth;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 if (this.progressElm !== undefined && this.autoplay) {
                     this._porgressWidth = value;
-                    this._renderer.setStyle(((/** @type {?} */ (this.progressContainerElm.nativeElement))).children[0], 'width', this.progressWidth + "%");
+                    this._renderer.setStyle(this.progressContainerElm.nativeElement.children[0], 'width', this.progressWidth + "%");
                 }
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(NgxAdvancedCarouselComponent.prototype, "grabbing", {
-            get: /**
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this._grabbing;
             },
-            set: /**
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 var _this = this;
                 if (this._grabbing !== value) {
-                    this._zone.run((/**
-                     * @return {?}
-                     */
-                    function () {
+                    this._zone.run(function () {
                         _this._grabbing = value;
                         if (value) {
                             _this._renderer.addClass(_this.containerElm, 'grabbing');
@@ -742,19 +716,14 @@
                             _this._renderer.removeClass(_this.containerElm, 'grabbing');
                         }
                         _this._cd.detectChanges();
-                    }));
+                    });
                 }
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(NgxAdvancedCarouselComponent.prototype, "left", {
-            set: /**
-             * @private
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 if (common.isPlatformBrowser(this.platformId)) {
                     this._renderer.setStyle(this.containerElm, 'transform', "translateX(" + value + "px)");
                 }
@@ -766,22 +735,17 @@
             configurable: true
         });
         Object.defineProperty(NgxAdvancedCarouselComponent.prototype, "maxRightIndex", {
-            get: /**
-             * @private
-             * @return {?}
-             */
-            function () {
-                /** @type {?} */
+            get: function () {
                 var addIndex = 0;
                 switch (this.align) {
                     case 'left':
                         addIndex = 0;
                         break;
                     case 'center':
-                        addIndex = ((/** @type {?} */ (this.showNum))) - 1;
+                        addIndex = this.showNum - 1;
                         break;
                     case 'right':
-                        addIndex = ((/** @type {?} */ (this.showNum))) - 1;
+                        addIndex = this.showNum - 1;
                         break;
                 }
                 return this.itemElms.length - 1 - this._showNum + 1 + addIndex;
@@ -790,33 +754,21 @@
             configurable: true
         });
         Object.defineProperty(NgxAdvancedCarouselComponent.prototype, "runLoop", {
-            get: /**
-             * @private
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this.autoplay || this.infinite;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(NgxAdvancedCarouselComponent.prototype, "lengthOne", {
-            get: /**
-             * @private
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return this.itemElms.length === 1;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(NgxAdvancedCarouselComponent.prototype, "rootElmWidth", {
-            get: /**
-             * @private
-             * @return {?}
-             */
-            function () {
+            get: function () {
                 return common.isPlatformBrowser(this.platformId)
                     ? this.rootElm.getBoundingClientRect().width
                     : 100;
@@ -825,115 +777,54 @@
             configurable: true
         });
         Object.defineProperty(NgxAdvancedCarouselComponent.prototype, "containerElmWidth", {
-            set: /**
-             * @private
-             * @param {?} value
-             * @return {?}
-             */
-            function (value) {
+            set: function (value) {
                 this.setStyle(this.containerElm, 'width', value);
             },
             enumerable: true,
             configurable: true
         });
-        /**
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.ngAfterViewInit = /**
-         * @return {?}
-         */
-        function () {
+        NgxAdvancedCarouselComponent.prototype.ngAfterViewInit = function () {
             var _this = this;
             this.rootElm = this.container.nativeElement;
-            this.containerElm = (/** @type {?} */ (this.rootElm.children[0]));
+            this.containerElm = this.rootElm.children[0];
             this.init();
             rxjs.forkJoin(__spread(this.bindClick(), [
                 // when item changed, remove old hammer binding, and reset width
                 this.itemElms.changes.pipe(
                 // detectChanges to change view dots
-                operators.tap((/**
-                 * @return {?}
-                 */
-                function () {
+                operators.tap(function () {
                     if (_this.currentIndex > _this.itemElms.length - 1) {
                         // i can't pass the changedetection check, only the way to using timeout. :(
-                        setTimeout((/**
-                         * @return {?}
-                         */
-                        function () {
+                        setTimeout(function () {
                             _this.currentIndex = _this.itemElms.length - 1;
-                        }), 0);
+                        }, 0);
                     }
                     _this.destroy();
                     _this.init();
                     _this.progressWidth = 0;
-                })), operators.tap((/**
-                 * @return {?}
-                 */
-                function () { return _this._cd.detectChanges(); }))),
-                resizeObservable(this.rootElm, (/**
-                 * @return {?}
-                 */
-                function () { return _this.containerResize(); })),
+                }), operators.tap(function () { return _this._cd.detectChanges(); })),
+                resizeObservable(this.rootElm, function () { return _this.containerResize(); }),
             ]))
                 .pipe(operators.takeUntil(this.destroy$))
                 .subscribe();
         };
-        /**
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.ngOnDestroy = /**
-         * @return {?}
-         */
-        function () {
+        NgxAdvancedCarouselComponent.prototype.ngOnDestroy = function () {
             this.destroy();
             this.destroy$.next();
             this.destroy$.unsubscribe();
         };
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.writeValue = /**
-         * @param {?} value
-         * @return {?}
-         */
-        function (value) {
+        NgxAdvancedCarouselComponent.prototype.writeValue = function (value) {
             if (value || value === 0) {
                 this.currentIndex = value;
             }
         };
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.registerOnChange = /**
-         * @param {?} fn
-         * @return {?}
-         */
-        function (fn) {
+        NgxAdvancedCarouselComponent.prototype.registerOnChange = function (fn) {
             this.onChange = fn;
         };
-        /**
-         * @param {?} fn
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.registerOnTouched = /**
-         * @param {?} fn
-         * @return {?}
-         */
-        function (fn) {
+        NgxAdvancedCarouselComponent.prototype.registerOnTouched = function (fn) {
             this.onTouched = fn;
         };
-        /**
-         * @private
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.init = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        NgxAdvancedCarouselComponent.prototype.init = function () {
             this.initVariable();
             this.setViewWidth(true);
             this.reSetAlignDistance();
@@ -945,97 +836,35 @@
               this.addInfiniteElm();
             } */
         };
-        /**
-         * @private
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.destroy = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        NgxAdvancedCarouselComponent.prototype.destroy = function () {
             this.destoryHammer();
             if (this.autoplay) {
                 this.doNextSub$.unsubscribe();
             }
         };
-        /**
-         * @private
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.destoryHammer = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        NgxAdvancedCarouselComponent.prototype.destoryHammer = function () {
             if (this.hammer) {
                 this.hammer.destroy();
             }
         };
-        /**
-         * @private
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.containerResize = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        NgxAdvancedCarouselComponent.prototype.containerResize = function () {
             this.setViewWidth();
             this.reSetAlignDistance();
             this.currentIndex = this.initialIndex;
             this.drawView(this.currentIndex, false);
         };
-        /**
-         * @private
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.initVariable = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        NgxAdvancedCarouselComponent.prototype.initVariable = function () {
             var _this = this;
-            this._zone.runOutsideAngular((/**
-             * @return {?}
-             */
-            function () {
-                _this.elms = _this.itemElms.toArray().map((/**
-                 * @param {?} x
-                 * @return {?}
-                 */
-                function (x) { return x.nativeElement; }));
-                /** @type {?} */
+            this._zone.runOutsideAngular(function () {
+                _this.elms = _this.itemElms.toArray().map(function (x) { return x.nativeElement; });
                 var startEvent = _this.restart.asObservable();
-                /** @type {?} */
                 var stopEvent = _this.stopEvent.asObservable();
                 if (_this.mourseEnable) {
-                    startEvent = rxjs.merge(startEvent, rxjs.fromEvent(_this.containerElm, 'mouseleave').pipe(operators.filter((/**
-                     * @return {?}
-                     */
-                    function () { return !_this.grabbing; })), operators.tap((/**
-                     * @return {?}
-                     */
-                    function () { return (_this.mouseOnContainer = false); }))));
-                    stopEvent = rxjs.merge(stopEvent, rxjs.fromEvent(_this.containerElm, 'mouseover').pipe(operators.tap((/**
-                     * @return {?}
-                     */
-                    function () { return (_this.mouseOnContainer = true); }))));
+                    startEvent = rxjs.merge(startEvent, rxjs.fromEvent(_this.containerElm, 'mouseleave').pipe(operators.filter(function () { return !_this.grabbing; }), operators.tap(function () { return (_this.mouseOnContainer = false); })));
+                    stopEvent = rxjs.merge(stopEvent, rxjs.fromEvent(_this.containerElm, 'mouseover').pipe(operators.tap(function () { return (_this.mouseOnContainer = true); })));
                 }
-                _this.doNext = startEvent.pipe(operators.switchMap((/**
-                 * @return {?}
-                 */
-                function () { return _this.speedChange; })), operators.switchMap((/**
-                 * @return {?}
-                 */
-                function () {
-                    return rxjs.timer(_this.delay).pipe(operators.switchMap((/**
-                     * @return {?}
-                     */
-                    function () { return _this.runProgress(20); })), operators.tap((/**
-                     * @return {?}
-                     */
-                    function () {
+                _this.doNext = startEvent.pipe(operators.switchMap(function () { return _this.speedChange; }), operators.switchMap(function () {
+                    return rxjs.timer(_this.delay).pipe(operators.switchMap(function () { return _this.runProgress(20); }), operators.tap(function () {
                         _this.isFromAuto = true;
                         if (_this.direction === 'left') {
                             _this.currentIndex -= _this.scrollNum;
@@ -1043,25 +872,14 @@
                         else {
                             _this.currentIndex += _this.scrollNum;
                         }
-                    })), operators.takeUntil(stopEvent.pipe(operators.tap((/**
-                     * @return {?}
-                     */
-                    function () { return (_this.progressWidth = 0); })))));
-                })));
+                    }), operators.takeUntil(stopEvent.pipe(operators.tap(function () { return (_this.progressWidth = 0); }))));
+                }));
                 if (_this.autoplay) {
                     _this.doNextSub$ = _this.doNext.subscribe();
                 }
-            }));
+            });
         };
-        /**
-         * @private
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.reSetAlignDistance = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        NgxAdvancedCarouselComponent.prototype.reSetAlignDistance = function () {
             switch (this.align) {
                 case 'center':
                     this.alignDistance = (this.rootElmWidth - this.elmWidth) / 2;
@@ -1074,17 +892,7 @@
                     break;
             }
         };
-        /**
-         * @private
-         * @param {?=} isInit
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.setViewWidth = /**
-         * @private
-         * @param {?=} isInit
-         * @return {?}
-         */
-        function (isInit) {
+        NgxAdvancedCarouselComponent.prototype.setViewWidth = function (isInit) {
             var _this = this;
             if (this.isAutoNum) {
                 this._showNum = this.getAutoNum();
@@ -1101,63 +909,35 @@
             this.containerElmWidth =
                 (this.elmWidth / this.gridBy.col) * this.elms.length;
             this._renderer.setStyle(this.containerElm, 'position', 'relative');
-            this.viewArea.forEach((/**
-             * @param {?} element
-             * @return {?}
-             */
-            function (element) {
+            this.viewArea.forEach(function (element) {
                 element.nativeElement.setAttribute('style', "width:" + (_this.rootElmWidth * _this.scrollNum * _this.gridBy.col) / _this._showNum + "px");
-            }));
-            this.elms.forEach((/**
-             * @param {?} elm
-             * @return {?}
-             */
-            function (elm) {
+            });
+            this.elms.forEach(function (elm) {
                 _this.setStyle(elm, 'width', _this.elmWidth);
-            }));
+            });
             this._cd.markForCheck();
         };
-        /**
-         * @private
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.bindHammer = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        NgxAdvancedCarouselComponent.prototype.bindHammer = function () {
             var _this = this;
             if (!common.isPlatformBrowser(this.platformId)) {
                 return null;
             }
-            return this._zone.runOutsideAngular((/**
-             * @return {?}
-             */
-            function () {
-                /** @type {?} */
+            return this._zone.runOutsideAngular(function () {
                 var hm = new hammerjs.Manager(_this.containerElm);
-                /** @type {?} */
                 var pan = new hammerjs.Pan({
                     direction: hammerjs.DIRECTION_HORIZONTAL,
                     threshold: 0,
                 });
                 hm.add(pan);
-                hm.on('panleft panright panend pancancel', (/**
-                 * @param {?} e
-                 * @return {?}
-                 */
-                function (e) {
+                hm.on('panleft panright panend pancancel', function (e) {
                     if (_this.lengthOne) {
                         return;
                     }
                     _this.removeContainerTransition();
                     if (_this.autoplay) {
-                        _this._zone.runOutsideAngular((/**
-                         * @return {?}
-                         */
-                        function () {
+                        _this._zone.runOutsideAngular(function () {
                             _this.stopEvent.next();
-                        }));
+                        });
                     }
                     switch (e.type) {
                         case 'panleft':
@@ -1199,13 +979,10 @@
                         case 'panend':
                             if (_this.panBoundary !== false &&
                                 Math.abs(e.deltaX) > _this.elmWidth * _this.panBoundary) {
-                                /** @type {?} */
                                 var moveNum = _this.isDragMany
                                     ? Math.ceil(Math.abs(e.deltaX) / _this.elmWidth)
                                     : _this.scrollNum;
-                                /** @type {?} */
                                 var prevIndex = _this.currentIndex - moveNum;
-                                /** @type {?} */
                                 var nextIndex = _this.currentIndex + moveNum;
                                 if (e.deltaX > 0) {
                                     _this.goPrev(prevIndex);
@@ -1226,104 +1003,45 @@
                             }
                             break;
                     }
-                }));
+                });
                 return hm;
-            }));
+            });
         };
-        /**
-         * @private
-         * @param {?} prevIndex
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.goPrev = /**
-         * @private
-         * @param {?} prevIndex
-         * @return {?}
-         */
-        function (prevIndex) {
+        NgxAdvancedCarouselComponent.prototype.goPrev = function (prevIndex) {
             if (!this.runLoop && prevIndex < 0) {
                 prevIndex = 0;
                 this.drawView(0);
             }
             this.currentIndex = prevIndex;
         };
-        /**
-         * @private
-         * @param {?} nextIndex
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.goNext = /**
-         * @private
-         * @param {?} nextIndex
-         * @return {?}
-         */
-        function (nextIndex) {
+        NgxAdvancedCarouselComponent.prototype.goNext = function (nextIndex) {
             if (!this.runLoop && nextIndex > this.maxRightIndex) {
                 nextIndex = this.maxRightIndex;
                 this.drawView(nextIndex);
             }
             this.currentIndex = nextIndex;
         };
-        /**
-         * @private
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.bindClick = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        NgxAdvancedCarouselComponent.prototype.bindClick = function () {
             var _this = this;
             if (this.btnNext && this.btnPrev) {
                 return [
-                    rxjs.fromEvent(this.btnNext.nativeElement, 'click').pipe(operators.map((/**
-                     * @return {?}
-                     */
-                    function () { return (_this.currentIndex += _this.scrollNum); }))),
-                    rxjs.fromEvent(this.btnPrev.nativeElement, 'click').pipe(operators.map((/**
-                     * @return {?}
-                     */
-                    function () {
+                    rxjs.fromEvent(this.btnNext.nativeElement, 'click').pipe(operators.map(function () { return (_this.currentIndex += _this.scrollNum); })),
+                    rxjs.fromEvent(this.btnPrev.nativeElement, 'click').pipe(operators.map(function () {
                         return (_this.currentIndex = _this.currentIndex - _this.scrollNum);
-                    }))),
+                    })),
                 ];
             }
             return [];
         };
-        /**
-         * @private
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.callRestart = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        NgxAdvancedCarouselComponent.prototype.callRestart = function () {
             var _this = this;
             if (this.autoplay && !this.mouseOnContainer && !this.grabbing) {
-                this._zone.runOutsideAngular((/**
-                 * @return {?}
-                 */
-                function () {
+                this._zone.runOutsideAngular(function () {
                     _this.restart.next(null);
-                }));
+                });
             }
         };
-        /**
-         * @private
-         * @param {?} index
-         * @param {?=} isAnimation
-         * @param {?=} isFromAuto
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.drawView = /**
-         * @private
-         * @param {?} index
-         * @param {?=} isAnimation
-         * @param {?=} isFromAuto
-         * @return {?}
-         */
-        function (index, isAnimation, isFromAuto) {
+        NgxAdvancedCarouselComponent.prototype.drawView = function (index, isAnimation, isFromAuto) {
             if (isAnimation === void 0) { isAnimation = true; }
             if (isFromAuto === void 0) { isFromAuto = this.isFromAuto; }
             if (this.elms.length > 1 && this.elms.length > this._showNum) {
@@ -1342,29 +1060,11 @@
                 this.left = this.alignDistance;
             }
         };
-        /**
-         * @private
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.removeContainerTransition = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        NgxAdvancedCarouselComponent.prototype.removeContainerTransition = function () {
             this._renderer.removeClass(this.containerElm, this.aniClass);
             this._renderer.removeClass(this.containerElm, this.aniClassAuto);
         };
-        /**
-         * @private
-         * @param {?} type
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.outOfBound = /**
-         * @private
-         * @param {?} type
-         * @return {?}
-         */
-        function (type) {
+        NgxAdvancedCarouselComponent.prototype.outOfBound = function (type) {
             switch (type) {
                 case 'panleft':
                     return this.currentIndex >= this.maxRightIndex;
@@ -1372,46 +1072,17 @@
                     return this.currentIndex <= 0;
             }
         };
-        /**
-         * @private
-         * @param {?} betweenTime
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.runProgress = /**
-         * @private
-         * @param {?} betweenTime
-         * @return {?}
-         */
-        function (betweenTime) {
+        NgxAdvancedCarouselComponent.prototype.runProgress = function (betweenTime) {
             var _this = this;
-            return this._zone.runOutsideAngular((/**
-             * @return {?}
-             */
-            function () {
-                /** @type {?} */
+            return this._zone.runOutsideAngular(function () {
                 var howTimes = _this.speed / betweenTime;
-                /** @type {?} */
                 var everyIncrease = (100 / _this.speed) * betweenTime;
-                return rxjs.interval(betweenTime).pipe(operators.tap((/**
-                 * @param {?} t
-                 * @return {?}
-                 */
-                function (t) {
+                return rxjs.interval(betweenTime).pipe(operators.tap(function (t) {
                     _this.progressWidth = (t % howTimes) * everyIncrease;
-                })), operators.bufferCount(Math.round(howTimes), 0));
-            }));
+                }), operators.bufferCount(Math.round(howTimes), 0));
+            });
         };
-        /**
-         * @private
-         * @param {?} showNum
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.initData = /**
-         * @private
-         * @param {?} showNum
-         * @return {?}
-         */
-        function (showNum) {
+        NgxAdvancedCarouselComponent.prototype.initData = function (showNum) {
             if (!this.orginalData.length) {
                 this.orginalData = __spread(this.data);
             }
@@ -1422,32 +1093,17 @@
                 this.initialIndex = this.currentIndex;
             }
         };
-        /**
-         * @private
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.getAutoNum = /**
-         * @private
-         * @return {?}
-         */
-        function () {
+        NgxAdvancedCarouselComponent.prototype.getAutoNum = function () {
             var _this = this;
-            /** @type {?} */
             var currWidth = this.rootElmWidth;
             if (this.breakpoint.length > 0) {
-                /** @type {?} */
-                var now = this.breakpoint.find((/**
-                 * @param {?} b
-                 * @return {?}
-                 */
-                function (b) {
+                var now = this.breakpoint.find(function (b) {
                     return _this.screenSizeMap[b.screenSize] <= currWidth;
-                }));
+                });
                 if (now) {
                     if (now.gridBy) {
                         this.scrollNum = now.gridBy.col || now.scrollNum || now.number;
                         this.gridBy = now.gridBy;
-                        /** @type {?} */
                         var showNum = now.gridBy.col * now.gridBy.row || now.number;
                         return showNum;
                     }
@@ -1463,7 +1119,6 @@
                             this.breakpoint[this.breakpoint.length - 1].scrollNum ||
                             this.breakpoint[this.breakpoint.length - 1].number;
                     this.gridBy = this.breakpoint[this.breakpoint.length - 1].gridBy;
-                    /** @type {?} */
                     var showNum = this.breakpoint[this.breakpoint.length - 1].gridBy.col *
                         this.breakpoint[this.breakpoint.length - 1].gridBy.row ||
                         this.breakpoint[this.breakpoint.length - 1].number;
@@ -1477,28 +1132,13 @@
                     return this.breakpoint[this.breakpoint.length - 1].number;
                 }
             }
-            /** @type {?} */
             var initNum = 3;
             if (currWidth > 200) {
                 return Math.floor(initNum + currWidth / 100);
             }
             return initNum;
         };
-        /**
-         * @private
-         * @param {?} elm
-         * @param {?} style
-         * @param {?} value
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.setStyle = /**
-         * @private
-         * @param {?} elm
-         * @param {?} style
-         * @param {?} value
-         * @return {?}
-         */
-        function (elm, style, value) {
+        NgxAdvancedCarouselComponent.prototype.setStyle = function (elm, style, value) {
             if (common.isPlatformBrowser(this.platformId)) {
                 this._renderer.setStyle(elm, style, value + "px");
             }
@@ -1506,34 +1146,13 @@
                 this._renderer.setStyle(elm, style, value + "%");
             }
         };
-        /**
-         * @param {?} index
-         * @param {?} item
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.trackByFcn = /**
-         * @param {?} index
-         * @param {?} item
-         * @return {?}
-         */
-        function (index, item) {
+        NgxAdvancedCarouselComponent.prototype.trackByFcn = function (index, item) {
             if (!item || item[this.trackByKey]) {
                 return null;
             }
             return item[this.trackByKey];
         };
-        /**
-         * @param {?} arr
-         * @param {?} count
-         * @return {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.arrayCreator = /**
-         * @param {?} arr
-         * @param {?} count
-         * @return {?}
-         */
-        function (arr, count) {
-            /** @type {?} */
+        NgxAdvancedCarouselComponent.prototype.arrayCreator = function (arr, count) {
             var data = __spread(arr);
             for (var i = 0; i < count; i++) {
                 data.unshift(arr[arr.length - 1 - (i % arr.length)]);
@@ -1541,365 +1160,204 @@
             }
             return data;
         };
-        NgxAdvancedCarouselComponent.decorators = [
-            { type: core.Component, args: [{
-                        encapsulation: core.ViewEncapsulation.None,
-                        selector: 'ngx-advanced-carousel',
-                        template: "<div #containerElm class=\"carousel\">\n  <!-- main content -->\n  <div ngx-advanced-carousel-container class=\"content\">\n    <div\n      class=\"item cursor-pointer visible_important\"\n      ngx-advanced-carousel-item\n      *ngFor=\"let _x of data; let i = index; trackBy: trackByFcn\"\n    >\n      <div\n        class=\"slide d-flex\"\n        [ngClass]=\"gridBy.col != 1 || gridBy.row != 1 ? 'flex-wrap' : ''\"\n        #viewArea\n        *ngIf=\"i % (scrollNum * gridBy.row) === 0\"\n      >\n        <ng-container\n          *ngFor=\"\n            let item of data | slice: i:i + scrollNum * gridBy.row;\n            let j = index\n          \"\n        >\n          <ng-container\n            *ngTemplateOutlet=\"\n              carouselItemTemplate;\n              context: {\n                $implicit: item\n              }\n            \"\n          >\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </div>\n\n  <!-- left -->\n  <div\n    #prev\n    *ngIf=\"contentPrev\"\n    class=\"direction left\"\n    [ngClass]=\"[\n      showButtonsMethod !== 'auto-hide' ||\n      (showButtonsMethod === 'auto-hide' && currentIndex > 0)\n        ? 'visible'\n        : 'invisible',\n      showButtonsMethod !== 'auto-disable' ||\n      (showButtonsMethod === 'auto-disable' && currentIndex > 0)\n        ? ''\n        : 'disabled'\n    ]\"\n  >\n    <ng-container *ngTemplateOutlet=\"contentPrev\"></ng-container>\n  </div>\n  <!--  right -->\n  <div\n    #next\n    *ngIf=\"contentNext\"\n    class=\"direction right\"\n    [ngClass]=\"[\n      showButtonsMethod !== 'auto-hide' ||\n      (showButtonsMethod === 'auto-hide' && realIndex < data.length)\n        ? 'visible'\n        : 'invisible',\n      showButtonsMethod !== 'auto-disable' ||\n      (showButtonsMethod === 'auto-disable' && realIndex < data.length)\n        ? ''\n        : 'disabled'\n    ]\"\n  >\n    <ng-container *ngTemplateOutlet=\"contentNext\"></ng-container>\n  </div>\n  <!-- indicators -->\n  <ul class=\"indicators\" *ngIf=\"dotElm\">\n    <li *ngFor=\"let dot of itemElms; let i = index\" (click)=\"currentIndex = i\">\n      <ng-container\n        *ngTemplateOutlet=\"\n          dotElm;\n          context: {\n            $implicit: {\n              index: i,\n              currentIndex: currentIndex\n            }\n          }\n        \"\n      >\n      </ng-container>\n    </li>\n  </ul>\n  <!-- progress -->\n  <div *ngIf=\"progressElm && autoplay\" #progress>\n    <ng-container *ngTemplateOutlet=\"progressElm\"> </ng-container>\n  </div>\n\n  <div class=\"mask\" *ngIf=\"grabbing\">\n    <ng-container *ngIf=\"leaveObs$ | async\"></ng-container>\n  </div>\n</div>\n",
-                        providers: [
-                            {
-                                provide: forms.NG_VALUE_ACCESSOR,
-                                useExisting: core.forwardRef((/**
-                                 * @return {?}
-                                 */
-                                function () { return NgxAdvancedCarouselComponent; })),
-                                multi: true,
-                            },
-                        ],
-                        changeDetection: core.ChangeDetectionStrategy.OnPush,
-                        styles: [":host{display:block;height:100%}.leo-carousel-display-nowrap{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;overflow:hidden!important}.carousel{height:100%;overflow:hidden;position:relative;width:100%}.carousel .transition{transition:.5s ease-in-out}.carousel ul.indicators{bottom:1rem;left:0;list-style:none;margin:0;padding:0;position:absolute;text-align:center;width:100%}.carousel ul.indicators li{cursor:pointer;display:inline-block;padding:.5rem;position:relative}.carousel .direction{align-items:center;cursor:pointer;display:flex;height:100%;justify-content:center;position:absolute;top:0}.carousel .direction.left{left:0}.carousel .direction.right{position:absolute;right:0}.carousel .direction.disabled{opacity:.6;pointer-events:none}.carousel .content{display:flex}.carousel .content .item{display:block;opacity:0;width:100%}.carousel .content .item.fade_animation{transition:opacity 295ms linear .5s}.carousel .content .item.fade_animation_0{transition:opacity 295ms linear}.carousel .content .item.visible{opacity:1}.carousel .content .item:first-child,.carousel .content .item:last-child{opacity:0}.carousel .content .item.visible_important{opacity:1}.grab{cursor:-webkit-grab;cursor:grab}.grabbing{cursor:-webkit-grabbing;cursor:grabbing}.mask{bottom:0;left:0;position:absolute;right:0;top:0}"]
-                    }] }
-        ];
-        /** @nocollapse */
-        NgxAdvancedCarouselComponent.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
-            { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
-            { type: core.Renderer2 },
-            { type: core.NgZone },
-            { type: core.ChangeDetectorRef }
-        ]; };
-        NgxAdvancedCarouselComponent.propDecorators = {
-            data: [{ type: core.Input }],
-            disableDrag: [{ type: core.Input, args: ['disable-drag',] }],
-            infinite: [{ type: core.Input, args: ['infinite',] }],
-            speed: [{ type: core.Input, args: ['autoplay-speed',] }],
-            showNum: [{ type: core.Input, args: ['show-num',] }],
-            autoplay: [{ type: core.Input, args: ['autoplay',] }],
-            container: [{ type: core.ViewChild, args: ['containerElm', { static: false },] }],
-            viewArea: [{ type: core.ViewChildren, args: ['viewArea',] }],
-            btnPrev: [{ type: core.ViewChild, args: ['prev', { static: false },] }],
-            btnNext: [{ type: core.ViewChild, args: ['next', { static: false },] }],
-            progressContainerElm: [{ type: core.ViewChild, args: ['progress', { static: false },] }],
-            itemElms: [{ type: core.ContentChildren, args: [NgxAdvancedCarouselItemDirective, {
-                            descendants: true,
-                            read: core.ElementRef,
-                        },] }],
-            contentPrev: [{ type: core.ContentChild, args: ['carouselPrev', { static: false },] }],
-            contentNext: [{ type: core.ContentChild, args: ['carouselNext', { static: false },] }],
-            dotElm: [{ type: core.ContentChild, args: ['carouselDot', { static: false },] }],
-            carouselItemTemplate: [{ type: core.ContentChild, args: ['carouselItemTemplate', { static: false },] }],
-            progressElm: [{ type: core.ContentChild, args: ['carouselProgress', { static: false },] }],
-            mappedData: [{ type: core.Output }],
-            aniTime: [{ type: core.Input }],
-            aniClass: [{ type: core.Input }],
-            aniClassAuto: [{ type: core.Input }],
-            showButtonsMethod: [{ type: core.Input, args: ['show-next-prev-buttons',] }],
-            panBoundary: [{ type: core.Input, args: ['pan-boundary',] }],
-            align: [{ type: core.Input }],
-            notDrag: [{ type: core.Input, args: ['not-follow-pan',] }],
-            trackByKey: [{ type: core.Input }],
-            mourseEnable: [{ type: core.Input, args: ['mourse-enable',] }],
-            delay: [{ type: core.Input, args: ['between-delay',] }],
-            direction: [{ type: core.Input, args: ['autoplay-direction',] }],
-            scrollNum: [{ type: core.Input, args: ['scroll-num',] }],
-            isDragMany: [{ type: core.Input, args: ['drag-many',] }],
-            swipeVelocity: [{ type: core.Input, args: ['swipe-velocity',] }],
-            breakpoint: [{ type: core.Input }],
-            screenSizeMap: [{ type: core.Input }]
-        };
+        /** @nocollapse */ NgxAdvancedCarouselComponent.ɵfac = function NgxAdvancedCarouselComponent_Factory(t) { return new (t || NgxAdvancedCarouselComponent)(core.ɵɵdirectiveInject(core.PLATFORM_ID), core.ɵɵdirectiveInject(common.DOCUMENT), core.ɵɵdirectiveInject(core.Renderer2), core.ɵɵdirectiveInject(core.NgZone), core.ɵɵdirectiveInject(core.ChangeDetectorRef)); };
+        /** @nocollapse */ NgxAdvancedCarouselComponent.ɵcmp = core.ɵɵdefineComponent({ type: NgxAdvancedCarouselComponent, selectors: [["ngx-advanced-carousel"]], contentQueries: function NgxAdvancedCarouselComponent_ContentQueries(rf, ctx, dirIndex) { if (rf & 1) {
+                core.ɵɵcontentQuery(dirIndex, _c0, true);
+                core.ɵɵcontentQuery(dirIndex, _c1, true);
+                core.ɵɵcontentQuery(dirIndex, _c2, true);
+                core.ɵɵcontentQuery(dirIndex, _c3, true);
+                core.ɵɵcontentQuery(dirIndex, _c4, true);
+                core.ɵɵcontentQuery(dirIndex, NgxAdvancedCarouselItemDirective, true, core.ElementRef);
+            } if (rf & 2) {
+                var _t;
+                core.ɵɵqueryRefresh(_t = core.ɵɵloadQuery()) && (ctx.contentPrev = _t.first);
+                core.ɵɵqueryRefresh(_t = core.ɵɵloadQuery()) && (ctx.contentNext = _t.first);
+                core.ɵɵqueryRefresh(_t = core.ɵɵloadQuery()) && (ctx.dotElm = _t.first);
+                core.ɵɵqueryRefresh(_t = core.ɵɵloadQuery()) && (ctx.carouselItemTemplate = _t.first);
+                core.ɵɵqueryRefresh(_t = core.ɵɵloadQuery()) && (ctx.progressElm = _t.first);
+                core.ɵɵqueryRefresh(_t = core.ɵɵloadQuery()) && (ctx.itemElms = _t);
+            } }, viewQuery: function NgxAdvancedCarouselComponent_Query(rf, ctx) { if (rf & 1) {
+                core.ɵɵviewQuery(_c5, true);
+                core.ɵɵviewQuery(_c6, true);
+                core.ɵɵviewQuery(_c7, true);
+                core.ɵɵviewQuery(_c8, true);
+                core.ɵɵviewQuery(_c9, true);
+            } if (rf & 2) {
+                var _t;
+                core.ɵɵqueryRefresh(_t = core.ɵɵloadQuery()) && (ctx.container = _t.first);
+                core.ɵɵqueryRefresh(_t = core.ɵɵloadQuery()) && (ctx.btnPrev = _t.first);
+                core.ɵɵqueryRefresh(_t = core.ɵɵloadQuery()) && (ctx.btnNext = _t.first);
+                core.ɵɵqueryRefresh(_t = core.ɵɵloadQuery()) && (ctx.progressContainerElm = _t.first);
+                core.ɵɵqueryRefresh(_t = core.ɵɵloadQuery()) && (ctx.viewArea = _t);
+            } }, inputs: { data: "data", disableDrag: ["disable-drag", "disableDrag"], infinite: "infinite", speed: ["autoplay-speed", "speed"], showNum: ["show-num", "showNum"], autoplay: "autoplay", aniTime: "aniTime", aniClass: "aniClass", aniClassAuto: "aniClassAuto", showButtonsMethod: ["show-next-prev-buttons", "showButtonsMethod"], panBoundary: ["pan-boundary", "panBoundary"], align: "align", notDrag: ["not-follow-pan", "notDrag"], trackByKey: "trackByKey", mourseEnable: ["mourse-enable", "mourseEnable"], delay: ["between-delay", "delay"], direction: ["autoplay-direction", "direction"], scrollNum: ["scroll-num", "scrollNum"], isDragMany: ["drag-many", "isDragMany"], swipeVelocity: ["swipe-velocity", "swipeVelocity"], breakpoint: "breakpoint", screenSizeMap: "screenSizeMap" }, outputs: { mappedData: "mappedData" }, features: [core.ɵɵProvidersFeature([
+                    {
+                        provide: forms.NG_VALUE_ACCESSOR,
+                        useExisting: core.forwardRef((function () { return NgxAdvancedCarouselComponent; })),
+                        multi: true,
+                    },
+                ])], decls: 9, vars: 7, consts: [[1, "carousel"], ["containerElm", ""], ["ngx-advanced-carousel-container", "", 1, "content"], ["class", "item cursor-pointer visible_important", "ngx-advanced-carousel-item", "", 4, "ngFor", "ngForOf", "ngForTrackBy"], ["class", "direction left", 3, "ngClass", 4, "ngIf"], ["class", "direction right", 3, "ngClass", 4, "ngIf"], ["class", "indicators", 4, "ngIf"], [4, "ngIf"], ["class", "mask", 4, "ngIf"], ["ngx-advanced-carousel-item", "", 1, "item", "cursor-pointer", "visible_important"], ["class", "slide", 3, "ngClass", 4, "ngIf"], [1, "slide", 3, "ngClass"], ["viewArea", ""], [4, "ngFor", "ngForOf"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], [1, "direction", "left", 3, "ngClass"], ["prev", ""], [4, "ngTemplateOutlet"], [1, "direction", "right", 3, "ngClass"], ["next", ""], [1, "indicators"], [3, "click", 4, "ngFor", "ngForOf"], [3, "click"], ["progress", ""], [1, "mask"]], template: function NgxAdvancedCarouselComponent_Template(rf, ctx) { if (rf & 1) {
+                core.ɵɵelementStart(0, "div", 0, 1);
+                core.ɵɵelementStart(2, "div", 2);
+                core.ɵɵtemplate(3, NgxAdvancedCarouselComponent_div_3_Template, 2, 1, "div", 3);
+                core.ɵɵelementEnd();
+                core.ɵɵtemplate(4, NgxAdvancedCarouselComponent_div_4_Template, 3, 5, "div", 4);
+                core.ɵɵtemplate(5, NgxAdvancedCarouselComponent_div_5_Template, 3, 5, "div", 5);
+                core.ɵɵtemplate(6, NgxAdvancedCarouselComponent_ul_6_Template, 2, 1, "ul", 6);
+                core.ɵɵtemplate(7, NgxAdvancedCarouselComponent_div_7_Template, 3, 1, "div", 7);
+                core.ɵɵtemplate(8, NgxAdvancedCarouselComponent_div_8_Template, 3, 3, "div", 8);
+                core.ɵɵelementEnd();
+            } if (rf & 2) {
+                core.ɵɵadvance(3);
+                core.ɵɵproperty("ngForOf", ctx.data)("ngForTrackBy", ctx.trackByFcn);
+                core.ɵɵadvance(1);
+                core.ɵɵproperty("ngIf", ctx.contentPrev);
+                core.ɵɵadvance(1);
+                core.ɵɵproperty("ngIf", ctx.contentNext);
+                core.ɵɵadvance(1);
+                core.ɵɵproperty("ngIf", ctx.dotElm);
+                core.ɵɵadvance(1);
+                core.ɵɵproperty("ngIf", ctx.progressElm && ctx.autoplay);
+                core.ɵɵadvance(1);
+                core.ɵɵproperty("ngIf", ctx.grabbing);
+            } }, directives: [common.NgForOf, common.NgIf, NgxAdvancedCarouselItemDirective, common.NgClass, common.NgTemplateOutlet], pipes: [common.SlicePipe, common.AsyncPipe], styles: [":host{display:block;height:100%}.leo-carousel-display-nowrap{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;overflow:hidden!important}.carousel{height:100%;overflow:hidden;position:relative;width:100%}.carousel .slide{display:flex;flex-direction:row}.carousel .transition{transition:.5s ease-in-out}.carousel ul.indicators{bottom:1rem;left:0;list-style:none;margin:0;padding:0;position:absolute;text-align:center;width:100%}.carousel ul.indicators li{cursor:pointer;display:inline-block;padding:.5rem;position:relative}.carousel .direction{align-items:center;cursor:pointer;display:flex;height:100%;justify-content:center;position:absolute;top:0}.carousel .direction.left{left:0}.carousel .direction.right{position:absolute;right:0}.carousel .direction.disabled{opacity:.6;pointer-events:none}.carousel .content{display:flex}.carousel .content .item{display:block;opacity:0;width:100%}.carousel .content .item.fade_animation{transition:opacity 295ms linear .5s}.carousel .content .item.fade_animation_0{transition:opacity 295ms linear}.carousel .content .item.visible{opacity:1}.carousel .content .item:first-child,.carousel .content .item:last-child{opacity:0}.carousel .content .item.visible_important{opacity:1}.grab{cursor:-webkit-grab;cursor:grab}.grabbing{cursor:-webkit-grabbing;cursor:grabbing}.mask{bottom:0;left:0;position:absolute;right:0;top:0}"], encapsulation: 2, changeDetection: 0 });
         return NgxAdvancedCarouselComponent;
     }());
-    if (false) {
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.container;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.viewArea;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.btnPrev;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.btnNext;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.progressContainerElm;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.itemElms;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.contentPrev;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.contentNext;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.dotElm;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.carouselItemTemplate;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.progressElm;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype._data;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.mappedData;
-        /**
-         * when infinite is true, the animation time with item, default is 400.
-         * @type {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.aniTime;
-        /**
-         * this class will add in #containerElm when model change
-         * @type {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.aniClass;
-        /**
-         * this class will add when carousel auto play,
-         * this default autoplay animation is same as aniClass
-         * @type {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.aniClassAuto;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.showButtonsMethod;
-        /**
-         * user move picture with the container width rate,
-         * when more than that rate, it will go to next or prev,
-         * set false will never move with distance rate,
-         * default is `0.15`
-         * @type {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.panBoundary;
-        /**
-         * when show-num is bigger than 1, the first item align, defaulte is `center`
-         * @type {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.align;
-        /**
-         * disable when drag occur the child element will follow touch point.
-         * default is `false`
-         * @type {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.notDrag;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.trackByKey;
-        /**
-         * the event binding state for stop auto play when mourse moveover
-         * @type {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.mourseEnable;
-        /**
-         * each auto play between time
-         * @type {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.delay;
-        /**
-         * auto play direction, default is `right`.
-         * @type {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.direction;
-        /**
-         * how many number with each scroll, default is `1`.
-         * @type {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.scrollNum;
-        /**
-         * Could user scroll many item once, simulate with scrollbar, default is `false`
-         * @type {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.isDragMany;
-        /**
-         * Minimal velocity required before recognizing, unit is in px per ms, default `0.3`
-         * @type {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.swipeVelocity;
-        /**
-         * switch show number with custom logic like css \@media (min-width: `number`px)
-         * @type {?}
-         */
-        NgxAdvancedCarouselComponent.prototype.breakpoint;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.screenSizeMap;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.leaveObs$;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.isFromAuto;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.isAutoNum;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.mouseOnContainer;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.alignDistance;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.elmWidth;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.rootElm;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.containerElm;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.elms;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.hammer;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.doNextSub$;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.doNext;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.restart;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.speedChange;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.stopEvent;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.destroy$;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype._porgressWidth;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype._currentIndex;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype._showNum;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype._autoplay;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype._infinite;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype._grabbing;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype._disableDrag;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.gridBy;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.panCount;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.realIndex;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.wrapperWidth;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.singleTimeRun;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.initialIndex;
-        /** @type {?} */
-        NgxAdvancedCarouselComponent.prototype.orginalData;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype._infineDataCount;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.onChange;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.onTouched;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype.platformId;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype._document;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype._renderer;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype._zone;
-        /**
-         * @type {?}
-         * @private
-         */
-        NgxAdvancedCarouselComponent.prototype._cd;
-    }
+    /*@__PURE__*/ (function () { core.ɵsetClassMetadata(NgxAdvancedCarouselComponent, [{
+            type: core.Component,
+            args: [{
+                    encapsulation: core.ViewEncapsulation.None,
+                    selector: 'ngx-advanced-carousel',
+                    styleUrls: ['./ngx-advanced-carousel.component.scss'],
+                    templateUrl: './ngx-advanced-carousel.component.html',
+                    providers: [
+                        {
+                            provide: forms.NG_VALUE_ACCESSOR,
+                            useExisting: core.forwardRef((function () { return NgxAdvancedCarouselComponent; })),
+                            multi: true,
+                        },
+                    ],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                }]
+        }], function () { return [{ type: undefined, decorators: [{
+                    type: core.Inject,
+                    args: [core.PLATFORM_ID]
+                }] }, { type: undefined, decorators: [{
+                    type: core.Inject,
+                    args: [common.DOCUMENT]
+                }] }, { type: core.Renderer2 }, { type: core.NgZone }, { type: core.ChangeDetectorRef }]; }, { data: [{
+                type: core.Input
+            }], disableDrag: [{
+                type: core.Input,
+                args: ['disable-drag']
+            }], infinite: [{
+                type: core.Input,
+                args: ['infinite']
+            }], speed: [{
+                type: core.Input,
+                args: ['autoplay-speed']
+            }], showNum: [{
+                type: core.Input,
+                args: ['show-num']
+            }], autoplay: [{
+                type: core.Input,
+                args: ['autoplay']
+            }], container: [{
+                type: core.ViewChild,
+                args: ['containerElm', { static: false }]
+            }], viewArea: [{
+                type: core.ViewChildren,
+                args: ['viewArea']
+            }], btnPrev: [{
+                type: core.ViewChild,
+                args: ['prev', { static: false }]
+            }], btnNext: [{
+                type: core.ViewChild,
+                args: ['next', { static: false }]
+            }], progressContainerElm: [{
+                type: core.ViewChild,
+                args: ['progress', { static: false }]
+            }], itemElms: [{
+                type: core.ContentChildren,
+                args: [NgxAdvancedCarouselItemDirective, {
+                        descendants: true,
+                        read: core.ElementRef,
+                    }]
+            }], contentPrev: [{
+                type: core.ContentChild,
+                args: ['carouselPrev', { static: false }]
+            }], contentNext: [{
+                type: core.ContentChild,
+                args: ['carouselNext', { static: false }]
+            }], dotElm: [{
+                type: core.ContentChild,
+                args: ['carouselDot', { static: false }]
+            }], carouselItemTemplate: [{
+                type: core.ContentChild,
+                args: ['carouselItemTemplate', { static: false }]
+            }], progressElm: [{
+                type: core.ContentChild,
+                args: ['carouselProgress', { static: false }]
+            }], mappedData: [{
+                type: core.Output
+            }], aniTime: [{
+                type: core.Input
+            }], aniClass: [{
+                type: core.Input
+            }], aniClassAuto: [{
+                type: core.Input
+            }], showButtonsMethod: [{
+                type: core.Input,
+                args: ['show-next-prev-buttons']
+            }], panBoundary: [{
+                type: core.Input,
+                args: ['pan-boundary']
+            }], align: [{
+                type: core.Input
+            }], notDrag: [{
+                type: core.Input,
+                args: ['not-follow-pan']
+            }], trackByKey: [{
+                type: core.Input
+            }], mourseEnable: [{
+                type: core.Input,
+                args: ['mourse-enable']
+            }], delay: [{
+                type: core.Input,
+                args: ['between-delay']
+            }], direction: [{
+                type: core.Input,
+                args: ['autoplay-direction']
+            }], scrollNum: [{
+                type: core.Input,
+                args: ['scroll-num']
+            }], isDragMany: [{
+                type: core.Input,
+                args: ['drag-many']
+            }], swipeVelocity: [{
+                type: core.Input,
+                args: ['swipe-velocity']
+            }], breakpoint: [{
+                type: core.Input
+            }], screenSizeMap: [{
+                type: core.Input
+            }] }); })();
 
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: lib/ngx-advanced-carousel.module.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     var NgxAdvancedCarouselModule = /** @class */ (function () {
         function NgxAdvancedCarouselModule() {
         }
-        NgxAdvancedCarouselModule.decorators = [
-            { type: core.NgModule, args: [{
-                        declarations: [NgxAdvancedCarouselComponent, NgxAdvancedCarouselItemDirective],
-                        exports: [NgxAdvancedCarouselComponent, NgxAdvancedCarouselItemDirective],
-                        imports: [common.CommonModule, forms.FormsModule],
-                    },] }
-        ];
+        /** @nocollapse */ NgxAdvancedCarouselModule.ɵmod = core.ɵɵdefineNgModule({ type: NgxAdvancedCarouselModule });
+        /** @nocollapse */ NgxAdvancedCarouselModule.ɵinj = core.ɵɵdefineInjector({ factory: function NgxAdvancedCarouselModule_Factory(t) { return new (t || NgxAdvancedCarouselModule)(); }, imports: [[common.CommonModule, forms.FormsModule]] });
         return NgxAdvancedCarouselModule;
     }());
+    (function () { (typeof ngJitMode === "undefined" || ngJitMode) && core.ɵɵsetNgModuleScope(NgxAdvancedCarouselModule, { declarations: [NgxAdvancedCarouselComponent, NgxAdvancedCarouselItemDirective], imports: [common.CommonModule, forms.FormsModule], exports: [NgxAdvancedCarouselComponent, NgxAdvancedCarouselItemDirective] }); })();
+    /*@__PURE__*/ (function () { core.ɵsetClassMetadata(NgxAdvancedCarouselModule, [{
+            type: core.NgModule,
+            args: [{
+                    declarations: [NgxAdvancedCarouselComponent, NgxAdvancedCarouselItemDirective],
+                    exports: [NgxAdvancedCarouselComponent, NgxAdvancedCarouselItemDirective],
+                    imports: [common.CommonModule, forms.FormsModule],
+                }]
+        }], null, null); })();
 
     exports.NgxAdvancedCarouselComponent = NgxAdvancedCarouselComponent;
     exports.NgxAdvancedCarouselItemDirective = NgxAdvancedCarouselItemDirective;
