@@ -1,45 +1,35 @@
 import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, NgZone, OnDestroy, QueryList, Renderer2, TemplateRef } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { Observable } from 'rxjs';
-import * as i0 from "@angular/core";
 export declare class NgxAdvancedCarouselComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
     private platformId;
     private _document;
     private _renderer;
     private _zone;
     private _cd;
-    get data(): any[];
-    set data(value: any[]);
+    data: any[];
     /** disable drag event with touch and mouse pan moving, default is `false` */
-    get disableDrag(): boolean;
-    set disableDrag(value: boolean);
+    disableDrag: boolean;
     /** is the carousel can move infinite */
-    get infinite(): boolean;
-    set infinite(value: boolean);
+    infinite: boolean;
     /** auto play speed */
-    get speed(): number;
-    set speed(value: number);
+    speed: number;
     /**
      * how many number items to show once, default is `1`
      * set `auto` to using `[breakpoint]` set value.
      */
-    get showNum(): number | 'auto';
-    set showNum(value: number | 'auto');
+    showNum: number | 'auto';
     /** carousel auto play confing */
-    get autoplay(): boolean;
-    set autoplay(value: boolean);
-    get currentIndex(): number;
-    set currentIndex(value: number);
-    get progressWidth(): number;
-    set progressWidth(value: number);
-    get grabbing(): boolean;
-    set grabbing(value: boolean);
-    private set left(value);
-    private get maxRightIndex();
-    private get runLoop();
-    private get lengthOne();
-    private get rootElmWidth();
-    private set containerElmWidth(value);
+    autoplay: boolean;
+    currentIndex: number;
+    progressWidth: number;
+    grabbing: boolean;
+    private left;
+    private readonly maxRightIndex;
+    private readonly runLoop;
+    private readonly lengthOne;
+    private readonly rootElmWidth;
+    private containerElmWidth;
     constructor(platformId: any, _document: any, _renderer: Renderer2, _zone: NgZone, _cd: ChangeDetectorRef);
     container: ElementRef;
     viewArea: QueryList<ElementRef>;
@@ -171,6 +161,4 @@ export declare class NgxAdvancedCarouselComponent implements ControlValueAccesso
     private setStyle;
     trackByFcn(index: any, item: any): any;
     arrayCreator(arr: any, count: any): any[];
-    static ɵfac: i0.ɵɵFactoryDef<NgxAdvancedCarouselComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDefWithMeta<NgxAdvancedCarouselComponent, "ngx-advanced-carousel", never, { "data": "data"; "disableDrag": "disable-drag"; "infinite": "infinite"; "speed": "autoplay-speed"; "showNum": "show-num"; "autoplay": "autoplay"; "aniTime": "aniTime"; "aniClass": "aniClass"; "aniClassAuto": "aniClassAuto"; "showButtonsMethod": "show-next-prev-buttons"; "panBoundary": "pan-boundary"; "align": "align"; "notDrag": "not-follow-pan"; "trackByKey": "trackByKey"; "mourseEnable": "mourse-enable"; "delay": "between-delay"; "direction": "autoplay-direction"; "scrollNum": "scroll-num"; "isDragMany": "drag-many"; "swipeVelocity": "swipe-velocity"; "breakpoint": "breakpoint"; "screenSizeMap": "screenSizeMap"; }, { "mappedData": "mappedData"; }, ["contentPrev", "contentNext", "dotElm", "carouselItemTemplate", "progressElm", "itemElms"], never>;
 }
