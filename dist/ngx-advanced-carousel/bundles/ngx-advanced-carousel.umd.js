@@ -1088,8 +1088,8 @@
             var _this = this;
             if (this.isAutoNum) {
                 this._showNum = this.getAutoNum();
-                this._infineDataCount = this._showNum * 2;
             }
+            this._infineDataCount = this._showNum * 2;
             this._renderer.addClass(this.containerElm, 'grab');
             if (isInit) {
                 // remain one elm height
