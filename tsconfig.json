@@ -11,9 +11,6 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "files": [
-      "*/**/*.d.ts"
-    ],
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -30,6 +27,9 @@
       ]
     }
   },
+  "files": [
+    "*/**/*.d.ts"
+  ],
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
