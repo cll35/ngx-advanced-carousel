@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('resize-observer-polyfill'), require('rxjs'), require('rxjs/operators'), require('@angular/core'), require('@angular/common'), require('@angular/forms'), require('hammerjs')) :
-    typeof define === 'function' && define.amd ? define('ngx-advanced-carousel', ['exports', 'resize-observer-polyfill', 'rxjs', 'rxjs/operators', '@angular/core', '@angular/common', '@angular/forms', 'hammerjs'], factory) :
-    (global = global || self, factory(global['ngx-advanced-carousel'] = {}, global['resize-observer-polyfill'], global.rxjs, global.rxjs.operators, global.ng.core, global.ng.common, global.ng.forms, global.hammerjs));
-}(this, (function (exports, ResizeObserver, rxjs, operators, core, common, forms, hammerjs) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('resize-observer-polyfill'), require('rxjs'), require('rxjs/operators'), require('@angular/core'), require('@angular/common'), require('@angular/forms')) :
+    typeof define === 'function' && define.amd ? define('ngx-advanced-carousel', ['exports', 'resize-observer-polyfill', 'rxjs', 'rxjs/operators', '@angular/core', '@angular/common', '@angular/forms'], factory) :
+    (global = global || self, factory(global['ngx-advanced-carousel'] = {}, global['resize-observer-polyfill'], global.rxjs, global.rxjs.operators, global.ng.core, global.ng.common, global.ng.forms));
+}(this, (function (exports, ResizeObserver, rxjs, operators, core, common, forms) { 'use strict';
 
     ResizeObserver = ResizeObserver && ResizeObserver.hasOwnProperty('default') ? ResizeObserver['default'] : ResizeObserver;
 
@@ -303,14 +303,14 @@
             /**
              * this class will add in #containerElm when model change
              */
-            this.aniClass = 'transition';
+            this.aniClass = "transition";
             /**
              * this class will add when carousel auto play,
              * this default autoplay animation is same as aniClass
              */
             this.aniClassAuto = this.aniClass;
             // tslint:disable-next-line: no-input-rename
-            this.showButtonsMethod = 'always';
+            this.showButtonsMethod = "always";
             /**
              * user move picture with the container width rate,
              * when more than that rate, it will go to next or prev,
@@ -321,13 +321,13 @@
             /**
              * when show-num is bigger than 1, the first item align, defaulte is `center`
              */
-            this.align = 'center';
+            this.align = "center";
             /**
              * disable when drag occur the child element will follow touch point.
              * default is `false`
              */
             this.notDrag = false;
-            this.trackByKey = 'code';
+            this.trackByKey = "code";
             /**
              * the event binding state for stop auto play when mourse moveover
              */
@@ -339,7 +339,7 @@
             /**
              * auto play direction, default is `right`.
              */
-            this.direction = 'right';
+            this.direction = "right";
             /**
              * how many number with each scroll, default is `1`.
              */
@@ -365,7 +365,7 @@
                 sm: 576,
                 xs: 0,
             };
-            this.leaveObs$ = rxjs.merge(rxjs.fromEvent(this._document, 'mouseup'), rxjs.fromEvent(this._document, 'touchend')).pipe(operators.tap((/**
+            this.leaveObs$ = rxjs.merge(rxjs.fromEvent(this._document, "mouseup"), rxjs.fromEvent(this._document, "touchend")).pipe(operators.tap((/**
              * @param {?} e
              * @return {?}
              */
@@ -522,7 +522,7 @@
              * @return {?}
              */
             function (value) {
-                if (value === 'auto') {
+                if (value === "auto") {
                     this.isAutoNum = true;
                 }
                 else {
@@ -708,7 +708,7 @@
             function (value) {
                 if (this.progressElm !== undefined && this.autoplay) {
                     this._porgressWidth = value;
-                    this._renderer.setStyle(((/** @type {?} */ (this.progressContainerElm.nativeElement))).children[0], 'width', this.progressWidth + "%");
+                    this._renderer.setStyle(((/** @type {?} */ (this.progressContainerElm.nativeElement))).children[0], "width", this.progressWidth + "%");
                 }
             },
             enumerable: true,
@@ -734,12 +734,12 @@
                     function () {
                         _this._grabbing = value;
                         if (value) {
-                            _this._renderer.addClass(_this.containerElm, 'grabbing');
+                            _this._renderer.addClass(_this.containerElm, "grabbing");
                         }
                         else {
                             _this.panCount = 0;
                             _this.callRestart();
-                            _this._renderer.removeClass(_this.containerElm, 'grabbing');
+                            _this._renderer.removeClass(_this.containerElm, "grabbing");
                         }
                         _this._cd.detectChanges();
                     }));
@@ -756,10 +756,10 @@
              */
             function (value) {
                 if (common.isPlatformBrowser(this.platformId)) {
-                    this._renderer.setStyle(this.containerElm, 'transform', "translateX(" + value + "px)");
+                    this._renderer.setStyle(this.containerElm, "transform", "translateX(" + value + "px)");
                 }
                 else {
-                    this._renderer.setStyle(this.containerElm, 'transform', "translateX(" + value + "%)");
+                    this._renderer.setStyle(this.containerElm, "transform", "translateX(" + value + "%)");
                 }
             },
             enumerable: true,
@@ -774,13 +774,13 @@
                 /** @type {?} */
                 var addIndex = 0;
                 switch (this.align) {
-                    case 'left':
+                    case "left":
                         addIndex = 0;
                         break;
-                    case 'center':
+                    case "center":
                         addIndex = ((/** @type {?} */ (this.showNum))) - 1;
                         break;
-                    case 'right':
+                    case "right":
                         addIndex = ((/** @type {?} */ (this.showNum))) - 1;
                         break;
                 }
@@ -831,7 +831,7 @@
              * @return {?}
              */
             function (value) {
-                this.setStyle(this.containerElm, 'width', value);
+                this.setStyle(this.containerElm, "width", value);
             },
             enumerable: true,
             configurable: true
@@ -1010,14 +1010,14 @@
                 /** @type {?} */
                 var stopEvent = _this.stopEvent.asObservable();
                 if (_this.mourseEnable) {
-                    startEvent = rxjs.merge(startEvent, rxjs.fromEvent(_this.containerElm, 'mouseleave').pipe(operators.filter((/**
+                    startEvent = rxjs.merge(startEvent, rxjs.fromEvent(_this.containerElm, "mouseleave").pipe(operators.filter((/**
                      * @return {?}
                      */
                     function () { return !_this.grabbing; })), operators.tap((/**
                      * @return {?}
                      */
                     function () { return (_this.mouseOnContainer = false); }))));
-                    stopEvent = rxjs.merge(stopEvent, rxjs.fromEvent(_this.containerElm, 'mouseover').pipe(operators.tap((/**
+                    stopEvent = rxjs.merge(stopEvent, rxjs.fromEvent(_this.containerElm, "mouseover").pipe(operators.tap((/**
                      * @return {?}
                      */
                     function () { return (_this.mouseOnContainer = true); }))));
@@ -1037,7 +1037,7 @@
                      */
                     function () {
                         _this.isFromAuto = true;
-                        if (_this.direction === 'left') {
+                        if (_this.direction === "left") {
                             _this.currentIndex -= _this.scrollNum;
                         }
                         else {
@@ -1063,13 +1063,13 @@
          */
         function () {
             switch (this.align) {
-                case 'center':
+                case "center":
                     this.alignDistance = (this.rootElmWidth - this.elmWidth) / 2;
                     break;
-                case 'left':
+                case "left":
                     this.alignDistance = 0;
                     break;
-                case 'right':
+                case "right":
                     this.alignDistance = this.rootElmWidth - this.elmWidth;
                     break;
             }
@@ -1090,30 +1090,30 @@
                 this._showNum = this.getAutoNum();
             }
             this._infineDataCount = this._showNum * 2;
-            this._renderer.addClass(this.containerElm, 'grab');
+            this._renderer.addClass(this.containerElm, "grab");
             if (isInit) {
                 // remain one elm height
                 this.initData(this._infineDataCount);
-                this._renderer.addClass(this.containerElm, 'ngx-advanced-carousel-display-nowrap');
+                this._renderer.addClass(this.containerElm, "ngx-advanced-carousel-display-nowrap");
             }
             this.elmWidth = this.rootElmWidth / (this._showNum / this.gridBy.col);
-            this._renderer.removeClass(this.containerElm, 'ngx-advanced-carousel-display-nowrap');
+            this._renderer.removeClass(this.containerElm, "ngx-advanced-carousel-display-nowrap");
             this.containerElmWidth =
                 (this.elmWidth / this.gridBy.col) * this.elms.length;
-            this._renderer.setStyle(this.containerElm, 'position', 'relative');
+            this._renderer.setStyle(this.containerElm, "position", "relative");
             this.viewArea.forEach((/**
              * @param {?} element
              * @return {?}
              */
             function (element) {
-                element.nativeElement.setAttribute('style', "width:" + (_this.rootElmWidth * _this.scrollNum * _this.gridBy.col) / _this._showNum + "px");
+                element.nativeElement.setAttribute("style", "width:" + (_this.rootElmWidth * _this.scrollNum * _this.gridBy.col) / _this._showNum + "px");
             }));
             this.elms.forEach((/**
              * @param {?} elm
              * @return {?}
              */
             function (elm) {
-                _this.setStyle(elm, 'width', _this.elmWidth);
+                _this.setStyle(elm, "width", _this.elmWidth);
             }));
             this._cd.markForCheck();
         };
@@ -1135,14 +1135,14 @@
              */
             function () {
                 /** @type {?} */
-                var hm = new hammerjs.Manager(_this.containerElm);
+                var hm = new Hammer.Manager(_this.containerElm);
                 /** @type {?} */
-                var pan = new hammerjs.Pan({
-                    direction: hammerjs.DIRECTION_HORIZONTAL,
+                var pan = new Hammer.Pan({
+                    direction: Hammer.DIRECTION_HORIZONTAL,
                     threshold: 0,
                 });
                 hm.add(pan);
-                hm.on('panleft panright panend pancancel', (/**
+                hm.on("panleft panright panend pancancel", (/**
                  * @param {?} e
                  * @return {?}
                  */
@@ -1160,14 +1160,14 @@
                         }));
                     }
                     switch (e.type) {
-                        case 'panleft':
-                        case 'panright':
+                        case "panleft":
+                        case "panright":
                             _this.panCount++;
                             if (_this.panCount < 2) {
                                 return;
                             }
                             _this.grabbing = true;
-                            if (_this.align !== 'center' && _this.showNum >= _this.elms.length) {
+                            if (_this.align !== "center" && _this.showNum >= _this.elms.length) {
                                 _this.hammer.stop(true);
                                 return;
                             }
@@ -1193,10 +1193,10 @@
                                 }
                             }
                             break;
-                        case 'pancancel':
+                        case "pancancel":
                             _this.drawView(_this.currentIndex);
                             break;
-                        case 'panend':
+                        case "panend":
                             if (_this.panBoundary !== false &&
                                 Math.abs(e.deltaX) > _this.elmWidth * _this.panBoundary) {
                                 /** @type {?} */
@@ -1276,11 +1276,11 @@
             var _this = this;
             if (this.btnNext && this.btnPrev) {
                 return [
-                    rxjs.fromEvent(this.btnNext.nativeElement, 'click').pipe(operators.map((/**
+                    rxjs.fromEvent(this.btnNext.nativeElement, "click").pipe(operators.map((/**
                      * @return {?}
                      */
                     function () { return (_this.currentIndex += _this.scrollNum); }))),
-                    rxjs.fromEvent(this.btnPrev.nativeElement, 'click').pipe(operators.map((/**
+                    rxjs.fromEvent(this.btnPrev.nativeElement, "click").pipe(operators.map((/**
                      * @return {?}
                      */
                     function () {
@@ -1366,9 +1366,9 @@
          */
         function (type) {
             switch (type) {
-                case 'panleft':
+                case "panleft":
                     return this.currentIndex >= this.maxRightIndex;
-                case 'panright':
+                case "panright":
                     return this.currentIndex <= 0;
             }
         };
@@ -1544,7 +1544,7 @@
         NgxAdvancedCarouselComponent.decorators = [
             { type: core.Component, args: [{
                         encapsulation: core.ViewEncapsulation.None,
-                        selector: 'ngx-advanced-carousel',
+                        selector: "ngx-advanced-carousel",
                         template: "<div #containerElm class=\"carousel\">\n  <!-- main content -->\n  <div ngx-advanced-carousel-container class=\"content\">\n    <div\n      class=\"item cursor-pointer visible_important\"\n      ngx-advanced-carousel-item\n      *ngFor=\"let _x of data; let i = index; trackBy: trackByFcn\"\n    >\n      <div\n        class=\"slide\"\n        [ngClass]=\"gridBy.col != 1 || gridBy.row != 1 ? 'flex-wrap' : ''\"\n        #viewArea\n        *ngIf=\"i % (scrollNum * gridBy.row) === 0\"\n      >\n        <ng-container\n          *ngFor=\"\n            let item of data | slice: i:i + scrollNum * gridBy.row;\n            let j = index\n          \"\n        >\n          <ng-container\n            *ngTemplateOutlet=\"\n              carouselItemTemplate;\n              context: {\n                $implicit: item\n              }\n            \"\n          >\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </div>\n\n  <!-- left -->\n  <div\n    #prev\n    *ngIf=\"contentPrev\"\n    class=\"direction left\"\n    [ngClass]=\"[\n      showButtonsMethod !== 'auto-hide' ||\n      (showButtonsMethod === 'auto-hide' && currentIndex > 0)\n        ? 'visible'\n        : 'invisible',\n      showButtonsMethod !== 'auto-disable' ||\n      (showButtonsMethod === 'auto-disable' && currentIndex > 0)\n        ? ''\n        : 'disabled'\n    ]\"\n  >\n    <ng-container *ngTemplateOutlet=\"contentPrev\"></ng-container>\n  </div>\n  <!--  right -->\n  <div\n    #next\n    *ngIf=\"contentNext\"\n    class=\"direction right\"\n    [ngClass]=\"[\n      showButtonsMethod !== 'auto-hide' ||\n      (showButtonsMethod === 'auto-hide' && realIndex < data.length)\n        ? 'visible'\n        : 'invisible',\n      showButtonsMethod !== 'auto-disable' ||\n      (showButtonsMethod === 'auto-disable' && realIndex < data.length)\n        ? ''\n        : 'disabled'\n    ]\"\n  >\n    <ng-container *ngTemplateOutlet=\"contentNext\"></ng-container>\n  </div>\n  <!-- indicators -->\n  <ul class=\"indicators\" *ngIf=\"dotElm\">\n    <li *ngFor=\"let dot of itemElms; let i = index\" (click)=\"currentIndex = i\">\n      <ng-container\n        *ngTemplateOutlet=\"\n          dotElm;\n          context: {\n            $implicit: {\n              index: i,\n              currentIndex: currentIndex\n            }\n          }\n        \"\n      >\n      </ng-container>\n    </li>\n  </ul>\n  <!-- progress -->\n  <div *ngIf=\"progressElm && autoplay\" #progress>\n    <ng-container *ngTemplateOutlet=\"progressElm\"> </ng-container>\n  </div>\n\n  <div class=\"mask\" *ngIf=\"grabbing\">\n    <ng-container *ngIf=\"leaveObs$ | async\"></ng-container>\n  </div>\n</div>\n",
                         providers: [
                             {
@@ -1570,40 +1570,40 @@
         ]; };
         NgxAdvancedCarouselComponent.propDecorators = {
             data: [{ type: core.Input }],
-            disableDrag: [{ type: core.Input, args: ['disable-drag',] }],
-            infinite: [{ type: core.Input, args: ['infinite',] }],
-            speed: [{ type: core.Input, args: ['autoplay-speed',] }],
-            showNum: [{ type: core.Input, args: ['show-num',] }],
-            autoplay: [{ type: core.Input, args: ['autoplay',] }],
-            container: [{ type: core.ViewChild, args: ['containerElm', { static: false },] }],
-            viewArea: [{ type: core.ViewChildren, args: ['viewArea',] }],
-            btnPrev: [{ type: core.ViewChild, args: ['prev', { static: false },] }],
-            btnNext: [{ type: core.ViewChild, args: ['next', { static: false },] }],
-            progressContainerElm: [{ type: core.ViewChild, args: ['progress', { static: false },] }],
+            disableDrag: [{ type: core.Input, args: ["disable-drag",] }],
+            infinite: [{ type: core.Input, args: ["infinite",] }],
+            speed: [{ type: core.Input, args: ["autoplay-speed",] }],
+            showNum: [{ type: core.Input, args: ["show-num",] }],
+            autoplay: [{ type: core.Input, args: ["autoplay",] }],
+            container: [{ type: core.ViewChild, args: ["containerElm", { static: false },] }],
+            viewArea: [{ type: core.ViewChildren, args: ["viewArea",] }],
+            btnPrev: [{ type: core.ViewChild, args: ["prev", { static: false },] }],
+            btnNext: [{ type: core.ViewChild, args: ["next", { static: false },] }],
+            progressContainerElm: [{ type: core.ViewChild, args: ["progress", { static: false },] }],
             itemElms: [{ type: core.ContentChildren, args: [NgxAdvancedCarouselItemDirective, {
                             descendants: true,
                             read: core.ElementRef,
                         },] }],
-            contentPrev: [{ type: core.ContentChild, args: ['carouselPrev', { static: false },] }],
-            contentNext: [{ type: core.ContentChild, args: ['carouselNext', { static: false },] }],
-            dotElm: [{ type: core.ContentChild, args: ['carouselDot', { static: false },] }],
-            carouselItemTemplate: [{ type: core.ContentChild, args: ['carouselItemTemplate', { static: false },] }],
-            progressElm: [{ type: core.ContentChild, args: ['carouselProgress', { static: false },] }],
+            contentPrev: [{ type: core.ContentChild, args: ["carouselPrev", { static: false },] }],
+            contentNext: [{ type: core.ContentChild, args: ["carouselNext", { static: false },] }],
+            dotElm: [{ type: core.ContentChild, args: ["carouselDot", { static: false },] }],
+            carouselItemTemplate: [{ type: core.ContentChild, args: ["carouselItemTemplate", { static: false },] }],
+            progressElm: [{ type: core.ContentChild, args: ["carouselProgress", { static: false },] }],
             mappedData: [{ type: core.Output }],
             aniTime: [{ type: core.Input }],
             aniClass: [{ type: core.Input }],
             aniClassAuto: [{ type: core.Input }],
-            showButtonsMethod: [{ type: core.Input, args: ['show-next-prev-buttons',] }],
-            panBoundary: [{ type: core.Input, args: ['pan-boundary',] }],
+            showButtonsMethod: [{ type: core.Input, args: ["show-next-prev-buttons",] }],
+            panBoundary: [{ type: core.Input, args: ["pan-boundary",] }],
             align: [{ type: core.Input }],
-            notDrag: [{ type: core.Input, args: ['not-follow-pan',] }],
+            notDrag: [{ type: core.Input, args: ["not-follow-pan",] }],
             trackByKey: [{ type: core.Input }],
-            mourseEnable: [{ type: core.Input, args: ['mourse-enable',] }],
-            delay: [{ type: core.Input, args: ['between-delay',] }],
-            direction: [{ type: core.Input, args: ['autoplay-direction',] }],
-            scrollNum: [{ type: core.Input, args: ['scroll-num',] }],
-            isDragMany: [{ type: core.Input, args: ['drag-many',] }],
-            swipeVelocity: [{ type: core.Input, args: ['swipe-velocity',] }],
+            mourseEnable: [{ type: core.Input, args: ["mourse-enable",] }],
+            delay: [{ type: core.Input, args: ["between-delay",] }],
+            direction: [{ type: core.Input, args: ["autoplay-direction",] }],
+            scrollNum: [{ type: core.Input, args: ["scroll-num",] }],
+            isDragMany: [{ type: core.Input, args: ["drag-many",] }],
+            swipeVelocity: [{ type: core.Input, args: ["swipe-velocity",] }],
             breakpoint: [{ type: core.Input }],
             screenSizeMap: [{ type: core.Input }]
         };

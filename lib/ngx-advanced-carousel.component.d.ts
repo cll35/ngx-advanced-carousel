@@ -1,6 +1,6 @@
-import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, NgZone, OnDestroy, QueryList, Renderer2, TemplateRef } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, NgZone, OnDestroy, QueryList, Renderer2, TemplateRef } from "@angular/core";
+import { ControlValueAccessor } from "@angular/forms";
+import { Observable } from "rxjs";
 export declare class NgxAdvancedCarouselComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
     private platformId;
     private _document;
@@ -18,7 +18,7 @@ export declare class NgxAdvancedCarouselComponent implements ControlValueAccesso
      * how many number items to show once, default is `1`
      * set `auto` to using `[breakpoint]` set value.
      */
-    showNum: number | 'auto';
+    showNum: number | "auto";
     /** carousel auto play confing */
     autoplay: boolean;
     currentIndex: number;
@@ -52,7 +52,7 @@ export declare class NgxAdvancedCarouselComponent implements ControlValueAccesso
      * this default autoplay animation is same as aniClass
      */
     aniClassAuto: string;
-    showButtonsMethod: 'always' | 'auto-hide' | 'auto-disable';
+    showButtonsMethod: "always" | "auto-hide" | "auto-disable";
     /**
      * user move picture with the container width rate,
      * when more than that rate, it will go to next or prev,
@@ -61,7 +61,7 @@ export declare class NgxAdvancedCarouselComponent implements ControlValueAccesso
      */
     panBoundary: number | false;
     /** when show-num is bigger than 1, the first item align, defaulte is `center` */
-    align: 'left' | 'center' | 'right';
+    align: "left" | "center" | "right";
     /**
      * disable when drag occur the child element will follow touch point.
      * default is `false`
@@ -75,7 +75,7 @@ export declare class NgxAdvancedCarouselComponent implements ControlValueAccesso
     /** each auto play between time */
     delay: number;
     /** auto play direction, default is `right`. */
-    direction: 'left' | 'right';
+    direction: "left" | "right";
     /** how many number with each scroll, default is `1`. */
     scrollNum: number;
     /** Could user scroll many item once, simulate with scrollbar, default is `false` */
@@ -87,7 +87,7 @@ export declare class NgxAdvancedCarouselComponent implements ControlValueAccesso
      */
     breakpoint: Array<{
         gridBy?: any;
-        screenSize: 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+        screenSize: "xxl" | "xl" | "lg" | "md" | "sm" | "xs";
         number: any;
         scrollNum?: any;
     }>;
