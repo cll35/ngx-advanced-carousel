@@ -1,4 +1,4 @@
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from "@angular/common";
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -24,9 +24,8 @@ import {
   ViewChildren,
   ViewContainerRef,
   ViewEncapsulation,
-} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import * as Hammer from 'hammerjs';
+} from "@angular/core";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import {
   BehaviorSubject,
   forkJoin,
@@ -38,7 +37,7 @@ import {
   Subject,
   Subscription,
   timer,
-} from 'rxjs';
+} from "rxjs";
 import {
   bufferCount,
   filter,
@@ -47,15 +46,15 @@ import {
   take,
   takeUntil,
   tap,
-} from 'rxjs/operators';
-import { NgxAdvancedCarouselItemDirective } from './ngx-advanced-carousel-item.directive';
-import { resizeObservable } from './rxjs.observable.resize';
-
+} from "rxjs/operators";
+import { NgxAdvancedCarouselItemDirective } from "./ngx-advanced-carousel-item.directive";
+import { resizeObservable } from "./rxjs.observable.resize";
+declare var Hammer;
 @Component({
   encapsulation: ViewEncapsulation.None,
-  selector: 'ngx-advanced-carousel',
-  styleUrls: ['./ngx-advanced-carousel.component.scss'],
-  templateUrl: './ngx-advanced-carousel.component.html',
+  selector: "ngx-advanced-carousel",
+  styleUrls: ["./ngx-advanced-carousel.component.scss"],
+  templateUrl: "./ngx-advanced-carousel.component.html",
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -75,7 +74,7 @@ export class NgxAdvancedCarouselComponent
     this._data = value;
   }
   /** disable drag event with touch and mouse pan moving, default is `false` */
-  @Input('disable-drag')
+  @Input("disable-drag")
   public get disableDrag() {
     return this._disableDrag;
   }
@@ -93,7 +92,7 @@ export class NgxAdvancedCarouselComponent
   }
 
   /** is the carousel can move infinite */
-  @Input('infinite')
+  @Input("infinite")
   public get infinite() {
     return this._infinite;
   }
@@ -108,7 +107,7 @@ export class NgxAdvancedCarouselComponent
   }
 
   /** auto play speed */
-  @Input('autoplay-speed')
+  @Input("autoplay-speed")
   public get speed() {
     return this.speedChange.value;
   }
@@ -122,12 +121,12 @@ export class NgxAdvancedCarouselComponent
    * how many number items to show once, default is `1`
    * set `auto` to using `[breakpoint]` set value.
    */
-  @Input('show-num')
-  public get showNum(): number | 'auto' {
+  @Input("show-num")
+  public get showNum(): number | "auto" {
     return this._showNum;
   }
-  public set showNum(value: number | 'auto') {
-    if (value === 'auto') {
+  public set showNum(value: number | "auto") {
+    if (value === "auto") {
       this.isAutoNum = true;
     } else {
       this._showNum = +value;
@@ -139,7 +138,7 @@ export class NgxAdvancedCarouselComponent
   }
 
   /** carousel auto play confing */
-  @Input('autoplay')
+  @Input("autoplay")
   public get autoplay() {
     return this._autoplay;
   }
@@ -230,7 +229,7 @@ export class NgxAdvancedCarouselComponent
                   this.drawView(this.currentIndex, false);
                   return of(null);
                 }),
-                take(1),
+                take(1)
               )
               .subscribe();
           });
@@ -270,8 +269,8 @@ export class NgxAdvancedCarouselComponent
       this._porgressWidth = value;
       this._renderer.setStyle(
         (this.progressContainerElm.nativeElement as HTMLElement).children[0],
-        'width',
-        `${this.progressWidth}%`,
+        "width",
+        `${this.progressWidth}%`
       );
     }
   }
@@ -284,11 +283,11 @@ export class NgxAdvancedCarouselComponent
       this._zone.run(() => {
         this._grabbing = value;
         if (value) {
-          this._renderer.addClass(this.containerElm, 'grabbing');
+          this._renderer.addClass(this.containerElm, "grabbing");
         } else {
           this.panCount = 0;
           this.callRestart();
-          this._renderer.removeClass(this.containerElm, 'grabbing');
+          this._renderer.removeClass(this.containerElm, "grabbing");
         }
         this._cd.detectChanges();
       });
@@ -299,14 +298,14 @@ export class NgxAdvancedCarouselComponent
     if (isPlatformBrowser(this.platformId)) {
       this._renderer.setStyle(
         this.containerElm,
-        'transform',
-        `translateX(${value}px)`,
+        "transform",
+        `translateX(${value}px)`
       );
     } else {
       this._renderer.setStyle(
         this.containerElm,
-        'transform',
-        `translateX(${value}%)`,
+        "transform",
+        `translateX(${value}%)`
       );
     }
   }
@@ -314,13 +313,13 @@ export class NgxAdvancedCarouselComponent
   private get maxRightIndex() {
     let addIndex = 0;
     switch (this.align) {
-      case 'left':
+      case "left":
         addIndex = 0;
         break;
-      case 'center':
+      case "center":
         addIndex = (this.showNum as number) - 1;
         break;
-      case 'right':
+      case "right":
         addIndex = (this.showNum as number) - 1;
         break;
     }
@@ -341,7 +340,7 @@ export class NgxAdvancedCarouselComponent
   }
 
   private set containerElmWidth(value: number) {
-    this.setStyle(this.containerElm, 'width', value);
+    this.setStyle(this.containerElm, "width", value);
   }
 
   constructor(
@@ -349,13 +348,13 @@ export class NgxAdvancedCarouselComponent
     @Inject(DOCUMENT) private _document,
     private _renderer: Renderer2,
     private _zone: NgZone,
-    private _cd: ChangeDetectorRef,
+    private _cd: ChangeDetectorRef
   ) {}
-  @ViewChild('containerElm', { static: false }) public container: ElementRef;
-  @ViewChildren('viewArea') public viewArea: QueryList<ElementRef>;
-  @ViewChild('prev', { static: false }) public btnPrev: ElementRef;
-  @ViewChild('next', { static: false }) public btnNext: ElementRef;
-  @ViewChild('progress', { static: false })
+  @ViewChild("containerElm", { static: false }) public container: ElementRef;
+  @ViewChildren("viewArea") public viewArea: QueryList<ElementRef>;
+  @ViewChild("prev", { static: false }) public btnPrev: ElementRef;
+  @ViewChild("next", { static: false }) public btnNext: ElementRef;
+  @ViewChild("progress", { static: false })
   public progressContainerElm: ElementRef;
 
   // get all item elms
@@ -365,16 +364,16 @@ export class NgxAdvancedCarouselComponent
   })
   public itemElms: QueryList<ElementRef>;
 
-  @ContentChild('carouselPrev', { static: false })
+  @ContentChild("carouselPrev", { static: false })
   public contentPrev: TemplateRef<any>;
-  @ContentChild('carouselNext', { static: false })
+  @ContentChild("carouselNext", { static: false })
   public contentNext: TemplateRef<any>;
-  @ContentChild('carouselDot', { static: false }) public dotElm: TemplateRef<
+  @ContentChild("carouselDot", { static: false }) public dotElm: TemplateRef<
     any
   >;
-  @ContentChild('carouselItemTemplate', { static: false })
+  @ContentChild("carouselItemTemplate", { static: false })
   public carouselItemTemplate: TemplateRef<any>;
-  @ContentChild('carouselProgress', { static: false })
+  @ContentChild("carouselProgress", { static: false })
   public progressElm: TemplateRef<any>;
 
   public _data: any[];
@@ -383,7 +382,7 @@ export class NgxAdvancedCarouselComponent
   /** when infinite is true, the animation time with item, default is 400. */
   @Input() public aniTime = 400;
   /** this class will add in #containerElm when model change */
-  @Input() public aniClass = 'transition';
+  @Input() public aniClass = "transition";
 
   /** this class will add when carousel auto play,
    * this default autoplay animation is same as aniClass
@@ -391,10 +390,10 @@ export class NgxAdvancedCarouselComponent
   @Input() public aniClassAuto = this.aniClass;
 
   // tslint:disable-next-line: no-input-rename
-  @Input('show-next-prev-buttons') public showButtonsMethod:
-    | 'always'
-    | 'auto-hide'
-    | 'auto-disable' = 'always';
+  @Input("show-next-prev-buttons") public showButtonsMethod:
+    | "always"
+    | "auto-hide"
+    | "auto-disable" = "always";
 
   /**
    * user move picture with the container width rate,
@@ -402,39 +401,39 @@ export class NgxAdvancedCarouselComponent
    * set false will never move with distance rate,
    * default is `0.15`
    */
-  @Input('pan-boundary') public panBoundary: number | false = 0.15;
+  @Input("pan-boundary") public panBoundary: number | false = 0.15;
 
   /** when show-num is bigger than 1, the first item align, defaulte is `center` */
-  @Input() public align: 'left' | 'center' | 'right' = 'center';
+  @Input() public align: "left" | "center" | "right" = "center";
 
   /**
    * disable when drag occur the child element will follow touch point.
    * default is `false`
    */
-  @Input('not-follow-pan') public notDrag = false;
+  @Input("not-follow-pan") public notDrag = false;
 
-  @Input() public trackByKey = 'code';
+  @Input() public trackByKey = "code";
   /**
    * the event binding state for stop auto play when mourse moveover
    */
-  @Input('mourse-enable') public mourseEnable = false;
+  @Input("mourse-enable") public mourseEnable = false;
   /** each auto play between time */
-  @Input('between-delay') public delay = 8000;
+  @Input("between-delay") public delay = 8000;
   /** auto play direction, default is `right`. */
-  @Input('autoplay-direction') public direction: 'left' | 'right' = 'right';
+  @Input("autoplay-direction") public direction: "left" | "right" = "right";
   /** how many number with each scroll, default is `1`. */
-  @Input('scroll-num') public scrollNum = 1;
+  @Input("scroll-num") public scrollNum = 1;
   /** Could user scroll many item once, simulate with scrollbar, default is `false` */
-  @Input('drag-many') public isDragMany = false;
+  @Input("drag-many") public isDragMany = false;
   /** Minimal velocity required before recognizing, unit is in px per ms, default `0.3` */
-  @Input('swipe-velocity') public swipeVelocity = 0.3;
+  @Input("swipe-velocity") public swipeVelocity = 0.3;
 
   /**
    * switch show number with custom logic like css @media (min-width: `number`px)
    */
   @Input() public breakpoint: Array<{
     gridBy?;
-    screenSize: 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+    screenSize: "xxl" | "xl" | "lg" | "md" | "sm" | "xs";
     number;
     scrollNum?;
   }> = [];
@@ -450,14 +449,14 @@ export class NgxAdvancedCarouselComponent
   };
 
   public leaveObs$ = merge(
-    fromEvent(this._document, 'mouseup'),
-    fromEvent(this._document, 'touchend'),
+    fromEvent(this._document, "mouseup"),
+    fromEvent(this._document, "touchend")
   ).pipe(
     tap((e: Event) => {
       this.grabbing = false;
       e.stopPropagation();
       e.preventDefault();
-    }),
+    })
   );
 
   private isFromAuto = true;
@@ -471,7 +470,7 @@ export class NgxAdvancedCarouselComponent
 
   private elms: Array<HTMLElement>;
 
-  private hammer: Hammer.HammerManager;
+  private hammer;
 
   private doNextSub$: Subscription;
   private doNext: Observable<any>;
@@ -526,7 +525,7 @@ export class NgxAdvancedCarouselComponent
           this.init();
           this.progressWidth = 0;
         }),
-        tap(() => this._cd.detectChanges()),
+        tap(() => this._cd.detectChanges())
       ),
       resizeObservable(this.rootElm, () => this.containerResize()),
     ])
@@ -600,16 +599,16 @@ export class NgxAdvancedCarouselComponent
       if (this.mourseEnable) {
         startEvent = merge(
           startEvent,
-          fromEvent(this.containerElm, 'mouseleave').pipe(
+          fromEvent(this.containerElm, "mouseleave").pipe(
             filter(() => !this.grabbing),
-            tap(() => (this.mouseOnContainer = false)),
-          ),
+            tap(() => (this.mouseOnContainer = false))
+          )
         );
         stopEvent = merge(
           stopEvent,
-          fromEvent(this.containerElm, 'mouseover').pipe(
-            tap(() => (this.mouseOnContainer = true)),
-          ),
+          fromEvent(this.containerElm, "mouseover").pipe(
+            tap(() => (this.mouseOnContainer = true))
+          )
         );
       }
 
@@ -620,15 +619,15 @@ export class NgxAdvancedCarouselComponent
             switchMap(() => this.runProgress(20)),
             tap(() => {
               this.isFromAuto = true;
-              if (this.direction === 'left') {
+              if (this.direction === "left") {
                 this.currentIndex -= this.scrollNum;
               } else {
                 this.currentIndex += this.scrollNum;
               }
             }),
-            takeUntil(stopEvent.pipe(tap(() => (this.progressWidth = 0)))),
-          ),
-        ),
+            takeUntil(stopEvent.pipe(tap(() => (this.progressWidth = 0))))
+          )
+        )
       );
 
       if (this.autoplay) {
@@ -639,13 +638,13 @@ export class NgxAdvancedCarouselComponent
 
   private reSetAlignDistance() {
     switch (this.align) {
-      case 'center':
+      case "center":
         this.alignDistance = (this.rootElmWidth - this.elmWidth) / 2;
         break;
-      case 'left':
+      case "left":
         this.alignDistance = 0;
         break;
-      case 'right':
+      case "right":
         this.alignDistance = this.rootElmWidth - this.elmWidth;
         break;
     }
@@ -656,34 +655,37 @@ export class NgxAdvancedCarouselComponent
       this._showNum = this.getAutoNum();
     }
     this._infineDataCount = this._showNum * 2;
-    this._renderer.addClass(this.containerElm, 'grab');
+    this._renderer.addClass(this.containerElm, "grab");
     if (isInit) {
       // remain one elm height
       this.initData(this._infineDataCount);
-      this._renderer.addClass(this.containerElm, 'ngx-advanced-carousel-display-nowrap');
+      this._renderer.addClass(
+        this.containerElm,
+        "ngx-advanced-carousel-display-nowrap"
+      );
     }
     this.elmWidth = this.rootElmWidth / (this._showNum / this.gridBy.col);
 
     this._renderer.removeClass(
       this.containerElm,
-      'ngx-advanced-carousel-display-nowrap',
+      "ngx-advanced-carousel-display-nowrap"
     );
 
     this.containerElmWidth =
       (this.elmWidth / this.gridBy.col) * this.elms.length;
 
-    this._renderer.setStyle(this.containerElm, 'position', 'relative');
+    this._renderer.setStyle(this.containerElm, "position", "relative");
     this.viewArea.forEach((element) => {
       element.nativeElement.setAttribute(
-        'style',
+        "style",
         `width:${
           (this.rootElmWidth * this.scrollNum * this.gridBy.col) / this._showNum
-        }px`,
+        }px`
       );
     });
 
     this.elms.forEach((elm: HTMLElement) => {
-      this.setStyle(elm, 'width', this.elmWidth);
+      this.setStyle(elm, "width", this.elmWidth);
     });
     this._cd.markForCheck();
   }
@@ -702,7 +704,7 @@ export class NgxAdvancedCarouselComponent
 
       hm.add(pan);
 
-      hm.on('panleft panright panend pancancel', (e: Hammer.HammerInput) => {
+      hm.on("panleft panright panend pancancel", (e) => {
         if (this.lengthOne) {
           return;
         }
@@ -716,15 +718,15 @@ export class NgxAdvancedCarouselComponent
         }
 
         switch (e.type) {
-          case 'panleft':
-          case 'panright':
+          case "panleft":
+          case "panright":
             this.panCount++;
             if (this.panCount < 2) {
               return;
             }
 
             this.grabbing = true;
-            if (this.align !== 'center' && this.showNum >= this.elms.length) {
+            if (this.align !== "center" && this.showNum >= this.elms.length) {
               this.hammer.stop(true);
               return;
             }
@@ -751,11 +753,11 @@ export class NgxAdvancedCarouselComponent
               }
             }
             break;
-          case 'pancancel':
+          case "pancancel":
             this.drawView(this.currentIndex);
             break;
 
-          case 'panend':
+          case "panend":
             if (
               this.panBoundary !== false &&
               Math.abs(e.deltaX) > this.elmWidth * this.panBoundary
@@ -807,13 +809,13 @@ export class NgxAdvancedCarouselComponent
   private bindClick() {
     if (this.btnNext && this.btnPrev) {
       return [
-        fromEvent(this.btnNext.nativeElement, 'click').pipe(
-          map(() => (this.currentIndex += this.scrollNum)),
+        fromEvent(this.btnNext.nativeElement, "click").pipe(
+          map(() => (this.currentIndex += this.scrollNum))
         ),
-        fromEvent(this.btnPrev.nativeElement, 'click').pipe(
+        fromEvent(this.btnPrev.nativeElement, "click").pipe(
           map(() => {
             return (this.currentIndex = this.currentIndex - this.scrollNum);
-          }),
+          })
         ),
       ];
     }
@@ -831,7 +833,7 @@ export class NgxAdvancedCarouselComponent
   private drawView(
     index: number,
     isAnimation = true,
-    isFromAuto = this.isFromAuto,
+    isFromAuto = this.isFromAuto
   ) {
     if (this.elms.length > 1 && this.elms.length > this._showNum) {
       this.removeContainerTransition();
@@ -856,9 +858,9 @@ export class NgxAdvancedCarouselComponent
 
   private outOfBound(type) {
     switch (type) {
-      case 'panleft':
+      case "panleft":
         return this.currentIndex >= this.maxRightIndex;
-      case 'panright':
+      case "panright":
         return this.currentIndex <= 0;
     }
   }
@@ -871,7 +873,7 @@ export class NgxAdvancedCarouselComponent
         tap((t) => {
           this.progressWidth = (t % howTimes) * everyIncrease;
         }),
-        bufferCount(Math.round(howTimes), 0),
+        bufferCount(Math.round(howTimes), 0)
       );
     });
   }
