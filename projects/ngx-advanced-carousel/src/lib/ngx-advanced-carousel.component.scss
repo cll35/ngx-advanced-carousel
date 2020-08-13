@@ -17,7 +17,9 @@ $transition_time: 0.5s;
   overflow: hidden !important;
 }
 
-.carousel-conntainer {
+.carousel-container {
+  position: relative;
+  
   .carousel {
     height: 100%;
     overflow: hidden;

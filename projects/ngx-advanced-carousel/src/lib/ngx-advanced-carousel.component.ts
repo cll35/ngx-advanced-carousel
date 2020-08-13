@@ -687,7 +687,7 @@ export class NgxAdvancedCarouselComponent
     this.elms.forEach((elm: HTMLElement) => {
       this.setStyle(elm, "width", this.elmWidth);
     });
-    this._cd.markForCheck();
+    this._cd.detectChanges();
   }
 
   private bindHammer() {

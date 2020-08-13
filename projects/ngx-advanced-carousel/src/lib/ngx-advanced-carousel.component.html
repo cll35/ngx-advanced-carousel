@@ -4,6 +4,9 @@
     <div ngx-advanced-carousel-container class="content">
       <div
         class="item cursor-pointer visible_important"
+        [ngStyle]="{
+          display: i % (scrollNum * gridBy.row) === 0 ? '' : 'none'
+        }"
         ngx-advanced-carousel-item
         *ngFor="let _x of data; let i = index; trackBy: trackByFcn"
       >
@@ -59,13 +62,13 @@
     [ngClass]="[
       showButtonsMethod !== 'auto-hide' ||
       (showButtonsMethod === 'auto-hide' &&
-        realIndex < data.length - 1 &&
+        realIndex + scrollNum * gridBy.row < data.length &&
         scrollNum * gridBy.row < data.length - 1)
         ? 'visible'
         : 'invisible',
       showButtonsMethod !== 'auto-disable' ||
       (showButtonsMethod === 'auto-disable' &&
-        realIndex < data.length - 1 &&
+        realIndex + scrollNum * gridBy.row < data.length - 1 &&
         scrollNum * gridBy.row < data.length - 1)
         ? ''
         : 'disabled'
