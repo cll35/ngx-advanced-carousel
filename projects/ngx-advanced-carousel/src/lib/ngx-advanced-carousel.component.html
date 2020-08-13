@@ -62,13 +62,13 @@
     [ngClass]="[
       showButtonsMethod !== 'auto-hide' ||
       (showButtonsMethod === 'auto-hide' &&
-        realIndex + _showNum < data.length &&
+        realIndex < data.length &&
         _showNum < data.length - 1)
         ? 'visible'
         : 'invisible',
       showButtonsMethod !== 'auto-disable' ||
       (showButtonsMethod === 'auto-disable' &&
-        realIndex + _showNum < data.length - 1 &&
+        realIndex < data.length - 1 &&
         _showNum < data.length - 1)
         ? ''
         : 'disabled'
