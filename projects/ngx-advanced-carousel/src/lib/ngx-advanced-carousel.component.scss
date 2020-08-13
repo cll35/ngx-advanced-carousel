@@ -1,10 +1,13 @@
-
-$transition_time:0.5s;
-$transition_time:0.5s;
+$transition_time: 0.5s;
+$transition_time: 0.5s;
 
 :host {
   display: block;
   height: 100%;
+}
+
+.invisible {
+  visibility: hidden;
 }
 
 .leo-carousel-display-nowrap {
@@ -14,19 +17,53 @@ $transition_time:0.5s;
   overflow: hidden !important;
 }
 
-.carousel {
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
+.carousel-conntainer {
+  .carousel {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
 
-  .slide{
-    display: flex;
-    flex-direction: row;
-    
-  }
-  .transition {
-    transition: all $transition_time ease-in-out;
+    .slide {
+      display: flex;
+      flex-direction: row;
+    }
+    .transition {
+      transition: all $transition_time ease-in-out;
+    }
+
+    .content {
+      display: flex;
+
+      .item {
+        display: block;
+        // fade
+        opacity: 0;
+        width: 100%;
+
+        // using delay to prevent left change show error
+        &.fade_animation {
+          transition: opacity 0.295s linear $transition_time;
+        }
+
+        &.fade_animation_0 {
+          transition: opacity 0.295s linear;
+        }
+
+        &.visible {
+          opacity: 1;
+        }
+
+        &:last-child,
+        &:first-child {
+          opacity: 0;
+        }
+
+        &.visible_important {
+          opacity: 1;
+        }
+      }
+    }
   }
 
   ul.indicators {
@@ -68,39 +105,6 @@ $transition_time:0.5s;
     &.disabled {
       opacity: 0.6;
       pointer-events: none;
-    }
-  }
-
-  .content {
-    display: flex;
-
-    .item {
-      display: block;
-      // fade
-      opacity: 0;
-      width: 100%;
-
-      // using delay to prevent left change show error
-      &.fade_animation {
-        transition: opacity 0.295s linear $transition_time;
-      }
-
-      &.fade_animation_0 {
-        transition: opacity 0.295s linear;
-      }
-
-      &.visible {
-        opacity: 1;
-      }
-
-      &:last-child,
-      &:first-child {
-        opacity: 0;
-      }
-
-      &.visible_important {
-        opacity: 1;
-      }
     }
   }
 }

@@ -1,37 +1,38 @@
-<div #containerElm class="carousel">
+<div #containerElm class="carousel-container">
   <!-- main content -->
-  <div ngx-advanced-carousel-container class="content">
-    <div
-      class="item cursor-pointer visible_important"
-      ngx-advanced-carousel-item
-      *ngFor="let _x of data; let i = index; trackBy: trackByFcn"
-    >
+  <div class="carousel">
+    <div ngx-advanced-carousel-container class="content">
       <div
-        class="slide"
-        [ngClass]="gridBy.col != 1 || gridBy.row != 1 ? 'flex-wrap' : ''"
-        #viewArea
-        *ngIf="i % (scrollNum * gridBy.row) === 0"
+        class="item cursor-pointer visible_important"
+        ngx-advanced-carousel-item
+        *ngFor="let _x of data; let i = index; trackBy: trackByFcn"
       >
-        <ng-container
-          *ngFor="
-            let item of data | slice: i:i + scrollNum * gridBy.row;
-            let j = index
-          "
+        <div
+          class="slide"
+          [ngClass]="gridBy.col != 1 || gridBy.row != 1 ? 'flex-wrap' : ''"
+          #viewArea
+          *ngIf="i % (scrollNum * gridBy.row) === 0"
         >
           <ng-container
-            *ngTemplateOutlet="
-              carouselItemTemplate;
-              context: {
-                $implicit: item
-              }
+            *ngFor="
+              let item of data | slice: i:i + scrollNum * gridBy.row;
+              let j = index
             "
           >
+            <ng-container
+              *ngTemplateOutlet="
+                carouselItemTemplate;
+                context: {
+                  $implicit: item
+                }
+              "
+            >
+            </ng-container>
           </ng-container>
-        </ng-container>
+        </div>
       </div>
     </div>
   </div>
-
   <!-- left -->
   <div
     #prev
@@ -57,11 +58,15 @@
     class="direction right"
     [ngClass]="[
       showButtonsMethod !== 'auto-hide' ||
-      (showButtonsMethod === 'auto-hide' && realIndex < data.length)
+      (showButtonsMethod === 'auto-hide' &&
+        realIndex < data.length - 1 &&
+        scrollNum * gridBy.row < data.length - 1)
         ? 'visible'
         : 'invisible',
       showButtonsMethod !== 'auto-disable' ||
-      (showButtonsMethod === 'auto-disable' && realIndex < data.length)
+      (showButtonsMethod === 'auto-disable' &&
+        realIndex < data.length - 1 &&
+        scrollNum * gridBy.row < data.length - 1)
         ? ''
         : 'disabled'
     ]"
@@ -70,20 +75,22 @@
   </div>
   <!-- indicators -->
   <ul class="indicators" *ngIf="dotElm">
-    <li *ngFor="let dot of itemElms; let i = index" (click)="currentIndex = i">
-      <ng-container
-        *ngTemplateOutlet="
-          dotElm;
-          context: {
-            $implicit: {
-              index: i,
-              currentIndex: currentIndex
+    <ng-container *ngFor="let dot of itemElms; let i = index">
+      <li *ngIf="i % (scrollNum * gridBy.row) === 0" (click)="currentIndex = i">
+        <ng-container
+          *ngTemplateOutlet="
+            dotElm;
+            context: {
+              $implicit: {
+                index: i,
+                currentIndex: currentIndex
+              }
             }
-          }
-        "
-      >
-      </ng-container>
-    </li>
+          "
+        >
+        </ng-container>
+      </li>
+    </ng-container>
   </ul>
   <!-- progress -->
   <div *ngIf="progressElm && autoplay" #progress>
