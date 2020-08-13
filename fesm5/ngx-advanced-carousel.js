@@ -405,6 +405,7 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
                                 this.scrollNum * this.gridBy.col
                             : this.currentIndex + this._showNum;
                     if (!this.infinite && this.realIndex > this.elms.length) {
+                        this.realIndex = this.elms.length;
                         if (this.gridBy.col * this.gridBy.row > 1) {
                             this._currentIndex =
                                 this.realIndex -
@@ -422,7 +423,6 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
                                     ? 0
                                     : this.elms.length - this._showNum;
                         }
-                        this.realIndex = this.elms.length;
                     }
                     this._currentIndex =
                         this.currentIndex < 0 && !this.infinite ? 0 : this.currentIndex;
