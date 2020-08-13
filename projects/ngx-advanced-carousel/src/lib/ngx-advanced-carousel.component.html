@@ -62,14 +62,14 @@
     [ngClass]="[
       showButtonsMethod !== 'auto-hide' ||
       (showButtonsMethod === 'auto-hide' &&
-        realIndex + scrollNum * gridBy.row < data.length &&
-        scrollNum * gridBy.row < data.length - 1)
+        realIndex + _showNum < data.length &&
+        _showNum < data.length - 1)
         ? 'visible'
         : 'invisible',
       showButtonsMethod !== 'auto-disable' ||
       (showButtonsMethod === 'auto-disable' &&
-        realIndex + scrollNum * gridBy.row < data.length - 1 &&
-        scrollNum * gridBy.row < data.length - 1)
+        realIndex + _showNum < data.length - 1 &&
+        _showNum < data.length - 1)
         ? ''
         : 'disabled'
     ]"
