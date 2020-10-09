@@ -43,11 +43,11 @@
     class="direction left"
     [ngClass]="[
       showButtonsMethod !== 'auto-hide' ||
-      (showButtonsMethod === 'auto-hide' && currentIndex > 0)
+      (showButtonsMethod === 'auto-hide' && currentIndex > 0) || infinite
         ? 'visible'
         : 'invisible',
       showButtonsMethod !== 'auto-disable' ||
-      (showButtonsMethod === 'auto-disable' && currentIndex > 0)
+      (showButtonsMethod === 'auto-disable' && currentIndex > 0) || infinite
         ? ''
         : 'disabled'
     ]"
@@ -63,13 +63,13 @@
       showButtonsMethod !== 'auto-hide' ||
       (showButtonsMethod === 'auto-hide' &&
         realIndex < data.length &&
-        _showNum < data.length - 1)
+        _showNum < data.length - 1) || infinite
         ? 'visible'
         : 'invisible',
       showButtonsMethod !== 'auto-disable' ||
       (showButtonsMethod === 'auto-disable' &&
         realIndex < data.length - 1 &&
-        _showNum < data.length - 1)
+        _showNum < data.length - 1) || infinite
         ? ''
         : 'disabled'
     ]"
