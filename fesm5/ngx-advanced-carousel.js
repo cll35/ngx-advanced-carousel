@@ -151,6 +151,7 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
             sm: 576,
             xs: 0,
         };
+        this.padding = 0;
         this.leaveObs$ = merge(fromEvent(this._document, "mouseup"), fromEvent(this._document, "touchend")).pipe(tap((/**
          * @param {?} e
          * @return {?}
@@ -543,7 +544,7 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
          */
         function (value) {
             if (isPlatformBrowser(this.platformId)) {
-                this._renderer.setStyle(this.containerElm, "transform", "translateX(" + value + "px)");
+                this._renderer.setStyle(this.containerElm, "transform", "translateX(" + (value + this.padding) + "px)");
             }
             else {
                 this._renderer.setStyle(this.containerElm, "transform", "translateX(" + value + "%)");
@@ -894,7 +895,9 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
          * @return {?}
          */
         function (element) {
-            element.nativeElement.setAttribute("style", "width:" + (_this.rootElmWidth * _this.scrollNum * _this.gridBy.col) / _this._showNum + "px");
+            element.nativeElement.setAttribute("style", "width:" + ((_this.rootElmWidth * _this.scrollNum * _this.gridBy.col) /
+                _this._showNum -
+                _this.padding * 2) + "px");
         }));
         this.elms.forEach((/**
          * @param {?} elm
@@ -1393,7 +1396,8 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
         isDragMany: [{ type: Input, args: ["drag-many",] }],
         swipeVelocity: [{ type: Input, args: ["swipe-velocity",] }],
         breakpoint: [{ type: Input }],
-        screenSizeMap: [{ type: Input }]
+        screenSizeMap: [{ type: Input }],
+        padding: [{ type: Input }]
     };
     return NgxAdvancedCarouselComponent;
 }());
@@ -1500,6 +1504,8 @@ if (false) {
     NgxAdvancedCarouselComponent.prototype.breakpoint;
     /** @type {?} */
     NgxAdvancedCarouselComponent.prototype.screenSizeMap;
+    /** @type {?} */
+    NgxAdvancedCarouselComponent.prototype.padding;
     /** @type {?} */
     NgxAdvancedCarouselComponent.prototype.leaveObs$;
     /**

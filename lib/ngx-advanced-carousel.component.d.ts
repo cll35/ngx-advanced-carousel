@@ -99,6 +99,7 @@ export declare class NgxAdvancedCarouselComponent implements ControlValueAccesso
         sm: number;
         xs: number;
     };
+    padding: number;
     leaveObs$: Observable<Event>;
     private isFromAuto;
     private isAutoNum;

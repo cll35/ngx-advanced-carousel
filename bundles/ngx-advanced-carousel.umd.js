@@ -365,6 +365,7 @@
                 sm: 576,
                 xs: 0,
             };
+            this.padding = 0;
             this.leaveObs$ = rxjs.merge(rxjs.fromEvent(this._document, "mouseup"), rxjs.fromEvent(this._document, "touchend")).pipe(operators.tap((/**
              * @param {?} e
              * @return {?}
@@ -757,7 +758,7 @@
              */
             function (value) {
                 if (common.isPlatformBrowser(this.platformId)) {
-                    this._renderer.setStyle(this.containerElm, "transform", "translateX(" + value + "px)");
+                    this._renderer.setStyle(this.containerElm, "transform", "translateX(" + (value + this.padding) + "px)");
                 }
                 else {
                     this._renderer.setStyle(this.containerElm, "transform", "translateX(" + value + "%)");
@@ -1108,7 +1109,9 @@
              * @return {?}
              */
             function (element) {
-                element.nativeElement.setAttribute("style", "width:" + (_this.rootElmWidth * _this.scrollNum * _this.gridBy.col) / _this._showNum + "px");
+                element.nativeElement.setAttribute("style", "width:" + ((_this.rootElmWidth * _this.scrollNum * _this.gridBy.col) /
+                    _this._showNum -
+                    _this.padding * 2) + "px");
             }));
             this.elms.forEach((/**
              * @param {?} elm
@@ -1607,7 +1610,8 @@
             isDragMany: [{ type: core.Input, args: ["drag-many",] }],
             swipeVelocity: [{ type: core.Input, args: ["swipe-velocity",] }],
             breakpoint: [{ type: core.Input }],
-            screenSizeMap: [{ type: core.Input }]
+            screenSizeMap: [{ type: core.Input }],
+            padding: [{ type: core.Input }]
         };
         return NgxAdvancedCarouselComponent;
     }());
@@ -1714,6 +1718,8 @@
         NgxAdvancedCarouselComponent.prototype.breakpoint;
         /** @type {?} */
         NgxAdvancedCarouselComponent.prototype.screenSizeMap;
+        /** @type {?} */
+        NgxAdvancedCarouselComponent.prototype.padding;
         /** @type {?} */
         NgxAdvancedCarouselComponent.prototype.leaveObs$;
         /**

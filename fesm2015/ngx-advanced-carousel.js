@@ -153,6 +153,7 @@ class NgxAdvancedCarouselComponent {
             sm: 576,
             xs: 0,
         };
+        this.padding = 0;
         this.leaveObs$ = merge(fromEvent(this._document, "mouseup"), fromEvent(this._document, "touchend")).pipe(tap((/**
          * @param {?} e
          * @return {?}
@@ -496,7 +497,7 @@ class NgxAdvancedCarouselComponent {
      */
     set left(value) {
         if (isPlatformBrowser(this.platformId)) {
-            this._renderer.setStyle(this.containerElm, "transform", `translateX(${value}px)`);
+            this._renderer.setStyle(this.containerElm, "transform", `translateX(${value + this.padding}px)`);
         }
         else {
             this._renderer.setStyle(this.containerElm, "transform", `translateX(${value}%)`);
@@ -773,7 +774,9 @@ class NgxAdvancedCarouselComponent {
          * @return {?}
          */
         (element) => {
-            element.nativeElement.setAttribute("style", `width:${(this.rootElmWidth * this.scrollNum * this.gridBy.col) / this._showNum}px`);
+            element.nativeElement.setAttribute("style", `width:${(this.rootElmWidth * this.scrollNum * this.gridBy.col) /
+                this._showNum -
+                this.padding * 2}px`);
         }));
         this.elms.forEach((/**
          * @param {?} elm
@@ -1197,7 +1200,8 @@ NgxAdvancedCarouselComponent.propDecorators = {
     isDragMany: [{ type: Input, args: ["drag-many",] }],
     swipeVelocity: [{ type: Input, args: ["swipe-velocity",] }],
     breakpoint: [{ type: Input }],
-    screenSizeMap: [{ type: Input }]
+    screenSizeMap: [{ type: Input }],
+    padding: [{ type: Input }]
 };
 if (false) {
     /** @type {?} */
@@ -1302,6 +1306,8 @@ if (false) {
     NgxAdvancedCarouselComponent.prototype.breakpoint;
     /** @type {?} */
     NgxAdvancedCarouselComponent.prototype.screenSizeMap;
+    /** @type {?} */
+    NgxAdvancedCarouselComponent.prototype.padding;
     /** @type {?} */
     NgxAdvancedCarouselComponent.prototype.leaveObs$;
     /**
