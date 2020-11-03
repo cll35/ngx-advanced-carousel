@@ -300,7 +300,7 @@ export class NgxAdvancedCarouselComponent
       this._renderer.setStyle(
         this.containerElm,
         "transform",
-        `translateX(${value}px)`
+        `translateX(${value + this.padding}px)`
       );
     } else {
       this._renderer.setStyle(
@@ -448,6 +448,8 @@ export class NgxAdvancedCarouselComponent
     sm: 576,
     xs: 0,
   };
+
+  @Input() padding: number = 0;
 
   public leaveObs$ = merge(
     fromEvent(this._document, "mouseup"),
@@ -681,7 +683,9 @@ export class NgxAdvancedCarouselComponent
       element.nativeElement.setAttribute(
         "style",
         `width:${
-          (this.rootElmWidth * this.scrollNum * this.gridBy.col) / this._showNum
+          (this.rootElmWidth * this.scrollNum * this.gridBy.col) /
+            this._showNum -
+          this.padding * 2
         }px`
       );
     });
