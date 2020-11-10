@@ -758,7 +758,7 @@
              */
             function (value) {
                 if (common.isPlatformBrowser(this.platformId)) {
-                    this._renderer.setStyle(this.containerElm, "transform", "translateX(" + (value + this.padding) + "px)");
+                    this._renderer.setStyle(this.containerElm, "transform", "translateX(" + value + "px)");
                 }
                 else {
                     this._renderer.setStyle(this.containerElm, "transform", "translateX(" + value + "%)");
