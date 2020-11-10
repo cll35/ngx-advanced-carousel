@@ -887,7 +887,8 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
         }
         this.elmWidth =
             this.rootElmWidth / (this._showNum / this.gridBy.col) -
-                (this.padding * 2) / (this.gridBy.col || this._showNum);
+                (this.padding * 2) /
+                    (this.gridBy.col > 1 ? this.gridBy.col : this._showNum);
         this._renderer.removeClass(this.containerElm, "ngx-advanced-carousel-display-nowrap");
         this.containerElmWidth =
             (this.elmWidth / this.gridBy.col) * this.elms.length;
