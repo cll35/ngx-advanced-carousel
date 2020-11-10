@@ -544,7 +544,7 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
          */
         function (value) {
             if (isPlatformBrowser(this.platformId)) {
-                this._renderer.setStyle(this.containerElm, "transform", "translateX(" + (value + this.padding) + "px)");
+                this._renderer.setStyle(this.containerElm, "transform", "translateX(" + (value + this.currentIndex !== 0 ? this.padding : 0) + "px)");
             }
             else {
                 this._renderer.setStyle(this.containerElm, "transform", "translateX(" + value + "%)");
@@ -888,7 +888,9 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
         this.elmWidth =
             this.rootElmWidth / (this._showNum / this.gridBy.col) -
                 (this.padding * 2) /
-                    (this.gridBy.col > 1 ? this.gridBy.col : this._showNum);
+                    (this.gridBy.col > 1
+                        ? this.gridBy.col
+                        : this._showNum / this.gridBy.row);
         this._renderer.removeClass(this.containerElm, "ngx-advanced-carousel-display-nowrap");
         this.containerElmWidth =
             (this.elmWidth / this.gridBy.col) * this.elms.length;
