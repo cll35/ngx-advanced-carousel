@@ -300,7 +300,7 @@ export class NgxAdvancedCarouselComponent
       this._renderer.setStyle(
         this.containerElm,
         "transform",
-        `translateX(${value + this.padding}px)`
+        `translateX(${value + this.currentIndex !== 0 ? this.padding : 0}px)`
       );
     } else {
       this._renderer.setStyle(
@@ -671,7 +671,9 @@ export class NgxAdvancedCarouselComponent
     this.elmWidth =
       this.rootElmWidth / (this._showNum / this.gridBy.col) -
       (this.padding * 2) /
-        (this.gridBy.col > 1 ? this.gridBy.col : this._showNum);
+        (this.gridBy.col > 1
+          ? this.gridBy.col
+          : this._showNum / this.gridBy.row);
 
     this._renderer.removeClass(
       this.containerElm,
