@@ -300,7 +300,7 @@ export class NgxAdvancedCarouselComponent
       this._renderer.setStyle(
         this.containerElm,
         "transform",
-        `translateX(${value + this.padding}px)`
+        `translateX(${value}px)`
       );
     } else {
       this._renderer.setStyle(
