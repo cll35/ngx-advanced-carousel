@@ -670,7 +670,8 @@ export class NgxAdvancedCarouselComponent
     }
     this.elmWidth =
       this.rootElmWidth / (this._showNum / this.gridBy.col) -
-      (this.padding * 2) / (this.gridBy.col || this._showNum);
+      (this.padding * 2) /
+        (this.gridBy.col > 1 ? this.gridBy.col : this._showNum);
 
     this._renderer.removeClass(
       this.containerElm,
