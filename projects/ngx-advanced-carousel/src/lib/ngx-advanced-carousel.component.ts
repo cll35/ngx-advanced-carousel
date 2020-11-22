@@ -164,7 +164,7 @@ export class NgxAdvancedCarouselComponent
       this.infinite = true;
     }
   }
-  @Input("current-index")
+
   public get currentIndex() {
     return this._currentIndex;
   }
@@ -259,6 +259,11 @@ export class NgxAdvancedCarouselComponent
         });
       }
     }
+    this.indexChanged.emit({
+      realIndex: this.realIndex,
+      currentIndex: this.currentIndex,
+      viewSize: this._showNum,
+    });
     this.isFromAuto = false;
   }
 
@@ -343,6 +348,8 @@ export class NgxAdvancedCarouselComponent
   private set containerElmWidth(value: number) {
     this.setStyle(this.containerElm, "width", value);
   }
+
+  @Output() public indexChanged: EventEmitter<any> = new EventEmitter();
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
