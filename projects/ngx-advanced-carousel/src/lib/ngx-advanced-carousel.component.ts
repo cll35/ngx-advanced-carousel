@@ -175,7 +175,14 @@ export class NgxAdvancedCarouselComponent
       if (value < 0) {
         value = 0;
       }
-      if (!this.runLoop && !(0 <= value && value <= this.itemElms.length - 1)) {
+      if (
+        !this.runLoop &&
+        !(
+          0 <= value &&
+          Array.isArray(this.itemElms) &&
+          value <= this.itemElms.length - 1
+        )
+      ) {
         return;
       }
       this._currentIndex = value;
@@ -350,6 +357,7 @@ export class NgxAdvancedCarouselComponent
   }
 
   @Output() public indexChanged: EventEmitter<any> = new EventEmitter();
+  @Input() public startIndex = 0;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
@@ -902,7 +910,7 @@ export class NgxAdvancedCarouselComponent
     if (this.infinite) {
       this.singleTimeRun = false;
       this.data = this.arrayCreator(this.orginalData, showNum);
-      this._currentIndex = showNum;
+      this._currentIndex = this.startIndex || showNum;
       this.initialIndex = this.currentIndex;
     }
   }
