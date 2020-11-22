@@ -164,7 +164,7 @@ export class NgxAdvancedCarouselComponent
       this.infinite = true;
     }
   }
-
+  @Input("current-index")
   public get currentIndex() {
     return this._currentIndex;
   }
@@ -369,9 +369,8 @@ export class NgxAdvancedCarouselComponent
   public contentPrev: TemplateRef<any>;
   @ContentChild("carouselNext", { static: false })
   public contentNext: TemplateRef<any>;
-  @ContentChild("carouselDot", { static: false }) public dotElm: TemplateRef<
-    any
-  >;
+  @ContentChild("carouselDot", { static: false })
+  public dotElm: TemplateRef<any>;
   @ContentChild("carouselItemTemplate", { static: false })
   public carouselItemTemplate: TemplateRef<any>;
   @ContentChild("carouselProgress", { static: false })

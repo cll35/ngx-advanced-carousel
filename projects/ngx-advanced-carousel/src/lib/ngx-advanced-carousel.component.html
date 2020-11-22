@@ -43,11 +43,13 @@
     class="direction left"
     [ngClass]="[
       showButtonsMethod !== 'auto-hide' ||
-      (showButtonsMethod === 'auto-hide' && currentIndex > 0) || infinite
+      (showButtonsMethod === 'auto-hide' && currentIndex > 0) ||
+      infinite
         ? 'visible'
         : 'invisible',
       showButtonsMethod !== 'auto-disable' ||
-      (showButtonsMethod === 'auto-disable' && currentIndex > 0) || infinite
+      (showButtonsMethod === 'auto-disable' && currentIndex > 0) ||
+      infinite
         ? ''
         : 'disabled'
     ]"
@@ -63,13 +65,15 @@
       showButtonsMethod !== 'auto-hide' ||
       (showButtonsMethod === 'auto-hide' &&
         realIndex < data.length &&
-        _showNum < data.length) || infinite
+        _showNum < data.length) ||
+      infinite
         ? 'visible'
         : 'invisible',
       showButtonsMethod !== 'auto-disable' ||
       (showButtonsMethod === 'auto-disable' &&
         realIndex < data.length - 1 &&
-        _showNum < data.length - 1) || infinite
+        _showNum < data.length - 1) ||
+      infinite
         ? ''
         : 'disabled'
     ]"
@@ -79,7 +83,13 @@
   <!-- indicators -->
   <ul class="indicators" *ngIf="dotElm">
     <ng-container *ngFor="let dot of itemElms; let i = index">
-      <li *ngIf="i % (scrollNum * gridBy.row) === 0" (click)="currentIndex = i">
+      <li
+        *ngIf="
+          (i + gridBy.col * gridBy.row) % (scrollNum * gridBy.row) === 0 &&
+          i + gridBy.col * gridBy.row < itemElms.length + scrollNum
+        "
+        (click)="currentIndex = i"
+      >
         <ng-container
           *ngTemplateOutlet="
             dotElm;
