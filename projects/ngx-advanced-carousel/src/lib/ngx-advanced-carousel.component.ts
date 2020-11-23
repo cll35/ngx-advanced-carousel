@@ -175,14 +175,7 @@ export class NgxAdvancedCarouselComponent
       if (value < 0) {
         value = 0;
       }
-      if (
-        !this.runLoop &&
-        !(
-          0 <= value &&
-          Array.isArray(this.itemElms) &&
-          value <= this.itemElms.length - 1
-        )
-      ) {
+      if (!this.runLoop && !(0 <= value && value <= this.itemElms.length - 1)) {
         return;
       }
       this._currentIndex = value;
