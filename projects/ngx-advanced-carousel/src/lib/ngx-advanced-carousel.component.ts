@@ -596,7 +596,7 @@ export class NgxAdvancedCarouselComponent
     this.setViewWidth();
     this.reSetAlignDistance();
 
-    this.currentIndex = this.initialIndex;
+    this.currentIndex = this.startIndex || this.initialIndex;
 
     this.drawView(this.currentIndex, false);
   }
