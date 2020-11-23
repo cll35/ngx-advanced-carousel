@@ -1,6 +1,6 @@
 {
   "name": "ngx-advanced-carousel",
-  "version": "0.0.0",
+  "version": "0.2.2",
   "main": "dist/ngx-advanced-carousel.d.ts",
   "scripts": {
     "ng": "ng",

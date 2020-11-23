@@ -572,6 +572,7 @@ export class NgxAdvancedCarouselComponent
       this.hammer = this.bindHammer();
     }
     this.drawView(this.currentIndex, false);
+    this.currentIndex = this.startIndex;
     /* if (isPlatformBrowser(this.platformId) && this.runLoop) {
       this.addInfiniteElm();
     } */
@@ -903,7 +904,7 @@ export class NgxAdvancedCarouselComponent
     if (this.infinite) {
       this.singleTimeRun = false;
       this.data = this.arrayCreator(this.orginalData, showNum);
-      this._currentIndex = this.startIndex || showNum;
+      this._currentIndex = showNum;
       this.initialIndex = this.currentIndex;
     }
   }
