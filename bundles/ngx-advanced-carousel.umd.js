@@ -601,9 +601,9 @@
                     if (value < 0) {
                         value = 0;
                     }
-                    if (!this.runLoop &&
-                        !(0 <= value && value <= this.itemElms.length - 1) &&
-                        !this.itemElms.length) {
+                    if (!this.itemElms ||
+                        (!this.runLoop &&
+                            !(0 <= value && value <= this.itemElms.length - 1))) {
                         return;
                     }
                     this._currentIndex = value;
