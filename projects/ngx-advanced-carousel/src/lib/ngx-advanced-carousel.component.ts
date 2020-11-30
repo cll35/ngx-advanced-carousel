@@ -350,7 +350,17 @@ export class NgxAdvancedCarouselComponent
   }
 
   @Output() public indexChanged: EventEmitter<any> = new EventEmitter();
-  @Input() public startIndex = 0;
+
+  private _startIndex = 0;
+
+  @Input()
+  private get startIndex() {
+    return this._startIndex;
+  }
+  private set startIndex(val) {
+    this._startIndex = val;
+    this.currentIndex = this._startIndex;
+  }
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
