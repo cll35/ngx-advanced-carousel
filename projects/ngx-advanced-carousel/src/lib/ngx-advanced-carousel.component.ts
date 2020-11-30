@@ -176,9 +176,9 @@ export class NgxAdvancedCarouselComponent
         value = 0;
       }
       if (
-        !this.runLoop &&
-        !(0 <= value && value <= this.itemElms.length - 1) &&
-        !this.itemElms.length
+        !this.itemElms ||
+        (!this.runLoop &&
+        !(0 <= value && value <= this.itemElms.length - 1))
       ) {
         return;
       }
