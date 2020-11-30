@@ -320,8 +320,8 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
                 if (this.rootElm) {
                     this.setViewWidth();
                     this.reSetAlignDistance();
-                    this.currentIndex = this.startIndex;
                 }
+                this.currentIndex = this.startIndex;
             }
         },
         enumerable: true,
@@ -908,6 +908,7 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
         if (this.isAutoNum) {
             this._showNum = this.getAutoNum();
             this.realIndex = this._showNum;
+            this.currentIndex = this.startIndex;
         }
         this._infineDataCount = this._showNum * 2;
         this._renderer.addClass(this.containerElm, "grab");
