@@ -134,6 +134,7 @@ export class NgxAdvancedCarouselComponent
       if (this.rootElm) {
         this.setViewWidth();
         this.reSetAlignDistance();
+        this.currentIndex = this.startIndex;
       }
     }
   }
