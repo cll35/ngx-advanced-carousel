@@ -178,8 +178,7 @@ export class NgxAdvancedCarouselComponent
       }
       if (
         !this.itemElms ||
-        (!this.runLoop &&
-        !(0 <= value && value <= this.itemElms.length - 1))
+        (!this.runLoop && !(0 <= value && value <= this.itemElms.length - 1))
       ) {
         return;
       }
@@ -459,6 +458,7 @@ export class NgxAdvancedCarouselComponent
     screenSize: "xxl" | "xl" | "lg" | "md" | "sm" | "xs";
     number;
     scrollNum?;
+    padding?;
   }> = [];
 
   @Input() public screenSizeMap = {
@@ -932,6 +932,7 @@ export class NgxAdvancedCarouselComponent
         return this.screenSizeMap[b.screenSize] <= currWidth;
       });
       if (now) {
+        this.padding = now.padding || this.padding;
         if (now.gridBy) {
           this.scrollNum = now.gridBy.col || now.scrollNum || now.number;
           this.gridBy = now.gridBy;
@@ -943,6 +944,8 @@ export class NgxAdvancedCarouselComponent
           return now.number;
         }
       }
+      this.padding =
+        this.breakpoint[this.breakpoint.length - 1].padding || this.padding;
       if (this.breakpoint[this.breakpoint.length - 1].gridBy) {
         this.scrollNum =
           this.breakpoint[this.breakpoint.length - 1].gridBy.col ||
