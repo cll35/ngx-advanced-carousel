@@ -705,7 +705,8 @@ export class NgxAdvancedCarouselComponent
     );
 
     this.containerElmWidth =
-      this.rootElmWidth * (this.elms.length / this._showNum);
+      (this.rootElmWidth - this.padding * 2) *
+      (this.elms.length / this._showNum);
 
     this._renderer.setStyle(this.containerElm, "position", "relative");
     this.viewArea.forEach((element) => {
