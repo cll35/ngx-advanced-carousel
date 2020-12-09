@@ -693,7 +693,7 @@ export class NgxAdvancedCarouselComponent
       );
     }
     this.elmWidth =
-      this.rootElmWidth / (this._showNum / this.gridBy.col) -
+      this.rootElmWidth / (this._showNum / this.gridBy.row) -
       (this.padding * 2) /
         (this.gridBy.col > 1
           ? this.gridBy.col
@@ -711,11 +711,7 @@ export class NgxAdvancedCarouselComponent
     this.viewArea.forEach((element) => {
       element.nativeElement.setAttribute(
         "style",
-        `width:${
-          (this.rootElmWidth * this.scrollNum * this.gridBy.col) /
-            this._showNum -
-          this.padding * 2
-        }px`
+        `width:${this.rootElmWidth - this.padding * 2}px`
       );
     });
 
