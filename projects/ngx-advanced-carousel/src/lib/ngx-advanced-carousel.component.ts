@@ -525,7 +525,7 @@ export class NgxAdvancedCarouselComponent
 
   public singleTimeRun = true;
   private initialIndex = 0;
-  public orginalData = [];
+  public originalData = [];
 
   private _infineDataCount = 0;
   public ngAfterViewInit() {
@@ -705,7 +705,8 @@ export class NgxAdvancedCarouselComponent
     );
 
     this.containerElmWidth =
-      this.rootElmWidth * (this.elms.length / this._showNum);
+      (this.rootElmWidth - this.padding * 2) *
+      (this.elms.length / this._showNum);
 
     this._renderer.setStyle(this.containerElm, "position", "relative");
     this.viewArea.forEach((element) => {
@@ -909,13 +910,13 @@ export class NgxAdvancedCarouselComponent
     });
   }
   private initData(showNum) {
-    if (!this.orginalData.length) {
-      this.orginalData = [...this.data];
+    if (!this.originalData.length) {
+      this.originalData = [...this.data];
     }
 
     if (this.infinite) {
       this.singleTimeRun = false;
-      this.data = this.arrayCreator(this.orginalData, showNum);
+      this.data = this.arrayCreator(this.originalData, showNum);
       this._currentIndex = showNum;
       this.initialIndex = this.currentIndex;
     }
