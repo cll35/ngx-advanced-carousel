@@ -86,7 +86,8 @@
       <li
         *ngIf="
           (i + gridBy.col * gridBy.row) % (scrollNum * gridBy.row) === 0 &&
-          i >= originalData.length && i + originalData.length < itemElms.length
+          i >= originalData.length &&
+          i + _showNum * 2 < itemElms.length
         "
         (click)="currentIndex = i"
       >
