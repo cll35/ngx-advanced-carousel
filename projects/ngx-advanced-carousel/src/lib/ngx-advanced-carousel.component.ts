@@ -219,15 +219,14 @@ export class NgxAdvancedCarouselComponent
           this.currentIndex < 0 && !this.infinite
             ? 0
             : this.infinite
-            ? (this.currentIndex < this.originalData.length
+            ? this.currentIndex < this.originalData.length
               ? this.currentIndex
-              : this.currentIndex - this.originalData.length)
+              : this.currentIndex - this.originalData.length
             : this.currentIndex;
         this.drawView(this.currentIndex, true);
         if (this.infinite) {
           if (this.currentIndex < this.initialIndex) {
-            this._currentIndex =
-              this.data.length - this._showNum * 4 + this.currentIndex;
+            this._currentIndex = this.currentIndex + this.originalData.length;
           }
           if (this.currentIndex > this.data.length - this._showNum * 2) {
             this._currentIndex =
