@@ -436,7 +436,7 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
                         if (this.currentIndex < this.initialIndex) {
                             this._currentIndex = this.currentIndex + this._showNum * 2;
                         }
-                        if (this.currentIndex > this.data.length - this._showNum * 2) {
+                        if (this.currentIndex > this.data.length - this._showNum * 2 - 1) {
                             this._currentIndex =
                                 this.currentIndex - this.data.length + this._showNum * 4;
                         }
