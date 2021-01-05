@@ -170,7 +170,7 @@ export class NgxAdvancedCarouselComponent
     }
   }
 
-  @Input() public verticalModeEnabled = true;
+  @Input() public verticalModeEnabled = false;
 
   public get currentIndex() {
     return this._currentIndex;
