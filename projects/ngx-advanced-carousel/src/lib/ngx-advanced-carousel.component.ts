@@ -132,7 +132,11 @@ export class NgxAdvancedCarouselComponent
       this._showNum = +value;
       this.realIndex = this._showNum;
       if (this.rootElm) {
-        this.setViewWidth();
+        if (!this.verticalModeEnabled) {
+          this.setViewWidth();
+        } else {
+          this.setViewHeight();
+        }
         this.reSetAlignDistance();
       }
       this.currentIndex = this.startIndex;
@@ -165,6 +169,8 @@ export class NgxAdvancedCarouselComponent
       this.infinite = true;
     }
   }
+
+  @Input() public verticalModeEnabled = true;
 
   public get currentIndex() {
     return this._currentIndex;
@@ -304,18 +310,38 @@ export class NgxAdvancedCarouselComponent
   }
 
   private set left(value: number) {
-    if (isPlatformBrowser(this.platformId)) {
-      this._renderer.setStyle(
-        this.containerElm,
-        "transform",
-        `translateX(${value + (this.currentIndex !== 0 ? this.padding : 0)}px)`
-      );
+    if (!this.verticalModeEnabled) {
+      if (isPlatformBrowser(this.platformId)) {
+        this._renderer.setStyle(
+          this.containerElm,
+          "transform",
+          `translateX(${
+            value + (this.currentIndex !== 0 ? this.padding : 0)
+          }px)`
+        );
+      } else {
+        this._renderer.setStyle(
+          this.containerElm,
+          "transform",
+          `translateX(${value}%)`
+        );
+      }
     } else {
-      this._renderer.setStyle(
-        this.containerElm,
-        "transform",
-        `translateX(${value}%)`
-      );
+      if (isPlatformBrowser(this.platformId)) {
+        this._renderer.setStyle(
+          this.containerElm,
+          "transform",
+          `translateY(${
+            value + (this.currentIndex !== 0 ? this.padding : 0)
+          }px)`
+        );
+      } else {
+        this._renderer.setStyle(
+          this.containerElm,
+          "transform",
+          `translateY(${value}%)`
+        );
+      }
     }
   }
 
@@ -348,8 +374,22 @@ export class NgxAdvancedCarouselComponent
       : 100;
   }
 
+  private get rootElmHeight() {
+    return isPlatformBrowser(this.platformId)
+      ? this.rootElm.getBoundingClientRect().height
+      : 100;
+  }
+
   private set containerElmWidth(value: number) {
-    this.setStyle(this.containerElm, "width", value);
+    if (!this.verticalModeEnabled) {
+      this.setStyle(this.containerElm, "width", value);
+    }else {
+      this.containerElmHeight = value;
+    }
+  }
+
+  private set containerElmHeight(value: number) {
+    this.setStyle(this.containerElm, "height", value);
   }
 
   @Output() public indexChanged: EventEmitter<any> = new EventEmitter();
@@ -425,7 +465,8 @@ export class NgxAdvancedCarouselComponent
   @Input("pan-boundary") public panBoundary: number | false = 0.15;
 
   /** when show-num is bigger than 1, the first item align, defaulte is `center` */
-  @Input() public align: "left" | "center" | "right" = "center";
+  @Input() public align: "left" | "center" | "right" | "top" | "bottom" =
+    "center";
 
   /**
    * disable when drag occur the child element will follow touch point.
@@ -488,6 +529,7 @@ export class NgxAdvancedCarouselComponent
   private mouseOnContainer = false;
   private alignDistance = 0;
   private elmWidth = 0;
+  private elmHeight = 0;
 
   private rootElm: HTMLElement;
   private containerElm: HTMLElement;
@@ -672,10 +714,65 @@ export class NgxAdvancedCarouselComponent
       case "right":
         this.alignDistance = this.rootElmWidth - this.elmWidth;
         break;
+      case "top":
+        this.alignDistance = 0;
+        break;
+      case "bottom":
+        this.alignDistance = this.rootElmHeight - this.elmHeight;
     }
   }
 
   private setViewWidth(isInit?: boolean) {
+    if (!this.verticalModeEnabled) {
+      if (this.isAutoNum) {
+        this._showNum = this.getAutoNum();
+        this.realIndex = this._showNum;
+        this.currentIndex = this.startIndex;
+      }
+      this._infineDataCount = this._showNum * 2;
+      this._renderer.addClass(this.containerElm, "grab");
+      if (isInit) {
+        // remain one elm height
+        this.initData(this._infineDataCount);
+        this._renderer.addClass(
+          this.containerElm,
+          "ngx-advanced-carousel-display-nowrap"
+        );
+      }
+      this.elmWidth =
+        this.rootElmWidth / (this._showNum / this.gridBy.row) -
+        (this.padding * 2) /
+          (this.gridBy.col > 1
+            ? this.gridBy.col
+            : this._showNum / this.gridBy.row);
+
+      this._renderer.removeClass(
+        this.containerElm,
+        "ngx-advanced-carousel-display-nowrap"
+      );
+
+      this.containerElmWidth =
+        (this.rootElmWidth - this.padding * 2) *
+        (this.elms.length / this._showNum);
+
+      this._renderer.setStyle(this.containerElm, "position", "relative");
+      this.viewArea.forEach((element) => {
+        element.nativeElement.setAttribute(
+          "style",
+          `width:${this.rootElmWidth - this.padding * 2}px`
+        );
+      });
+
+      this.elms.forEach((elm: HTMLElement) => {
+        this.setStyle(elm, "width", this.elmWidth);
+      });
+    } else {
+      this.setViewHeight(isInit);
+    }
+    this._cd.detectChanges();
+  }
+
+  private setViewHeight(isInit?: boolean) {
     if (this.isAutoNum) {
       this._showNum = this.getAutoNum();
       this.realIndex = this._showNum;
@@ -692,7 +789,7 @@ export class NgxAdvancedCarouselComponent
       );
     }
     this.elmWidth =
-      this.rootElmWidth / (this._showNum / this.gridBy.row) -
+      this.rootElmHeight / (this._showNum / this.gridBy.row) -
       (this.padding * 2) /
         (this.gridBy.col > 1
           ? this.gridBy.col
@@ -704,21 +801,20 @@ export class NgxAdvancedCarouselComponent
     );
 
     this.containerElmWidth =
-      (this.rootElmWidth - this.padding * 2) *
+      (this.rootElmHeight - this.padding * 2) *
       (this.elms.length / this._showNum);
 
     this._renderer.setStyle(this.containerElm, "position", "relative");
     this.viewArea.forEach((element) => {
       element.nativeElement.setAttribute(
         "style",
-        `width:${this.rootElmWidth - this.padding * 2}px`
+        `height:${this.rootElmHeight - this.padding * 2}px`
       );
     });
 
     this.elms.forEach((elm: HTMLElement) => {
-      this.setStyle(elm, "width", this.elmWidth);
+      this.setStyle(elm, "height", this.elmWidth);
     });
-    this._cd.detectChanges();
   }
 
   private bindHammer() {
@@ -762,19 +858,22 @@ export class NgxAdvancedCarouselComponent
               return;
             }
             if (!this.runLoop && this.outOfBound(e.type)) {
-              e.deltaX *= 0.2;
+              this.verticalModeEnabled ? e.deltaY : (e.deltaX *= 0.2);
             }
 
             if (!this.notDrag) {
               this.left =
                 -this.currentIndex * this.elmWidth +
                 this.alignDistance +
-                e.deltaX;
+                (this.verticalModeEnabled ? e.deltaY : e.deltaX);
             }
 
             if (!this.isDragMany) {
-              if (Math.abs(e.deltaX) > this.elmWidth * 0.5) {
-                if (e.deltaX > 0) {
+              if (
+                Math.abs(this.verticalModeEnabled ? e.deltaY : e.deltaX) >
+                this.elmWidth * 0.5
+              ) {
+                if ((this.verticalModeEnabled ? e.deltaY : e.deltaX) > 0) {
                   this.currentIndex -= this.scrollNum;
                 } else {
                   this.currentIndex += this.scrollNum;
@@ -791,16 +890,20 @@ export class NgxAdvancedCarouselComponent
           case "panend":
             if (
               this.panBoundary !== false &&
-              Math.abs(e.deltaX) > this.elmWidth * this.panBoundary
+              Math.abs(this.verticalModeEnabled ? e.deltaY : e.deltaX) >
+                this.elmWidth * this.panBoundary
             ) {
               const moveNum = this.isDragMany
-                ? Math.ceil(Math.abs(e.deltaX) / this.elmWidth)
+                ? Math.ceil(
+                    Math.abs(this.verticalModeEnabled ? e.deltaY : e.deltaX) /
+                      this.elmWidth
+                  )
                 : this.scrollNum;
 
               const prevIndex = this.currentIndex - moveNum;
               const nextIndex = this.currentIndex + moveNum;
 
-              if (e.deltaX > 0) {
+              if ((this.verticalModeEnabled ? e.deltaY : e.deltaX) > 0) {
                 this.goPrev(prevIndex);
               } else {
                 this.goNext(nextIndex);
