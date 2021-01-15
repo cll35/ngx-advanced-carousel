@@ -515,9 +515,9 @@ class NgxAdvancedCarouselComponent {
     set left(value) {
         if (!this.verticalModeEnabled) {
             if (isPlatformBrowser(this.platformId)) {
-                this._renderer.setStyle(this.containerElm, "transform", `translateX(${value +
-                    (this.currentIndex !== 0 ? this.padding : 0) *
-                        (this.align === "right" ? -1 : 1)}px)`);
+                this._renderer.setStyle(this.containerElm, "transform", `translateX(${(value +
+                    (this.currentIndex !== 0 ? this.padding : 0)) *
+                    (this.align === "right" ? -1 : 1)}px)`);
             }
             else {
                 this._renderer.setStyle(this.containerElm, "transform", `translateX(${value}%)`);
@@ -971,7 +971,7 @@ class NgxAdvancedCarouselComponent {
                         }
                         if (!this.notDrag) {
                             this.left =
-                                -this.currentIndex * this.elmWidth -
+                                -this.currentIndex * this.elmWidth +
                                     this.alignDistance +
                                     (this.verticalModeEnabled
                                         ? e.deltaY
@@ -1119,7 +1119,7 @@ class NgxAdvancedCarouselComponent {
     drawView(index, isAnimation = true, isFromAuto = this.isFromAuto) {
         if (this.elms.length > 1 && this.elms.length > this._showNum) {
             this.removeContainerTransition();
-            this.left = index * this.elmWidth + this.alignDistance;
+            this.left = -index * this.elmWidth + this.alignDistance;
             if (isAnimation) {
                 if (isFromAuto) {
                     this._renderer.addClass(this.containerElm, this.aniClassAuto);

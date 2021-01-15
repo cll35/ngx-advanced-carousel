@@ -563,8 +563,8 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
             if (!this.verticalModeEnabled) {
                 if (isPlatformBrowser(this.platformId)) {
                     this._renderer.setStyle(this.containerElm, "transform", "translateX(" + (value +
-                        (this.currentIndex !== 0 ? this.padding : 0) *
-                            (this.align === "right" ? -1 : 1)) + "px)");
+                        (this.currentIndex !== 0 ? this.padding : 0)) *
+                        (this.align === "right" ? -1 : 1) + "px)");
                 }
                 else {
                     this._renderer.setStyle(this.containerElm, "transform", "translateX(" + value + "%)");
@@ -1115,7 +1115,7 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
                         }
                         if (!_this.notDrag) {
                             _this.left =
-                                -_this.currentIndex * _this.elmWidth -
+                                -_this.currentIndex * _this.elmWidth +
                                     _this.alignDistance +
                                     (_this.verticalModeEnabled
                                         ? e.deltaY
@@ -1292,7 +1292,7 @@ var NgxAdvancedCarouselComponent = /** @class */ (function () {
         if (isFromAuto === void 0) { isFromAuto = this.isFromAuto; }
         if (this.elms.length > 1 && this.elms.length > this._showNum) {
             this.removeContainerTransition();
-            this.left = index * this.elmWidth + this.alignDistance;
+            this.left = -index * this.elmWidth + this.alignDistance;
             if (isAnimation) {
                 if (isFromAuto) {
                     this._renderer.addClass(this.containerElm, this.aniClassAuto);
