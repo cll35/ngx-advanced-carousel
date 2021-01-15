@@ -317,8 +317,8 @@ export class NgxAdvancedCarouselComponent
           this.containerElm,
           "transform",
           `translateX(${
-            value +
-            (this.currentIndex !== 0 ? this.padding : 0) *
+            (value +
+            (this.currentIndex !== 0 ? this.padding : 0)) *
               (this.align === "right" ? -1 : 1)
           }px)`
         );
@@ -870,7 +870,7 @@ export class NgxAdvancedCarouselComponent
 
             if (!this.notDrag) {
               this.left =
-                -this.currentIndex * this.elmWidth -
+                -this.currentIndex * this.elmWidth +
                 this.alignDistance +
                 (this.verticalModeEnabled
                   ? e.deltaY
@@ -998,7 +998,7 @@ export class NgxAdvancedCarouselComponent
   ) {
     if (this.elms.length > 1 && this.elms.length > this._showNum) {
       this.removeContainerTransition();
-      this.left = index * this.elmWidth + this.alignDistance;
+      this.left = -index * this.elmWidth + this.alignDistance;
 
       if (isAnimation) {
         if (isFromAuto) {
