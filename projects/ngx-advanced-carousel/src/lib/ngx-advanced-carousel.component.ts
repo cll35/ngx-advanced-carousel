@@ -186,6 +186,7 @@ export class NgxAdvancedCarouselComponent
         !this.itemElms ||
         (!this.runLoop && !(0 <= value && value <= this.itemElms.length - 1))
       ) {
+        this.drawView(this.currentIndex);
         return;
       }
       this._currentIndex = value;
@@ -316,7 +317,9 @@ export class NgxAdvancedCarouselComponent
           this.containerElm,
           "transform",
           `translateX(${
-            value + (this.currentIndex !== 0 ? this.padding : 0)
+            value +
+            (this.currentIndex !== 0 ? this.padding : 0) *
+              (this.align === "right" ? -1 : 1)
           }px)`
         );
       } else {
@@ -355,7 +358,10 @@ export class NgxAdvancedCarouselComponent
         addIndex = (this.showNum as number) - 1;
         break;
       case "right":
-        addIndex = (this.showNum as number) - 1;
+        addIndex = 0;
+        break;
+      default:
+        addIndex = 0;
         break;
     }
     return this.itemElms.length - 1 - this._showNum + 1 + addIndex;
@@ -383,7 +389,7 @@ export class NgxAdvancedCarouselComponent
   private set containerElmWidth(value: number) {
     if (!this.verticalModeEnabled) {
       this.setStyle(this.containerElm, "width", value);
-    }else {
+    } else {
       this.containerElmHeight = value;
     }
   }
@@ -490,6 +496,7 @@ export class NgxAdvancedCarouselComponent
   /** Minimal velocity required before recognizing, unit is in px per ms, default `0.3` */
   @Input("swipe-velocity") public swipeVelocity = 0.3;
 
+  @Input() public isRtl = false;
   /**
    * switch show number with custom logic like css @media (min-width: `number`px)
    */
@@ -712,13 +719,13 @@ export class NgxAdvancedCarouselComponent
         this.alignDistance = 0;
         break;
       case "right":
-        this.alignDistance = this.rootElmWidth - this.elmWidth;
+        this.alignDistance = 0;
         break;
       case "top":
         this.alignDistance = 0;
         break;
       case "bottom":
-        this.alignDistance = this.rootElmHeight - this.elmHeight;
+        this.alignDistance = 0;
     }
   }
 
@@ -863,9 +870,13 @@ export class NgxAdvancedCarouselComponent
 
             if (!this.notDrag) {
               this.left =
-                -this.currentIndex * this.elmWidth +
+                -this.currentIndex * this.elmWidth -
                 this.alignDistance +
-                (this.verticalModeEnabled ? e.deltaY : e.deltaX);
+                (this.verticalModeEnabled
+                  ? e.deltaY
+                  : this.align === "right"
+                  ? -e.deltaX
+                  : e.deltaX);
             }
 
             if (!this.isDragMany) {
@@ -874,9 +885,17 @@ export class NgxAdvancedCarouselComponent
                 this.elmWidth * 0.5
               ) {
                 if ((this.verticalModeEnabled ? e.deltaY : e.deltaX) > 0) {
-                  this.currentIndex -= this.scrollNum;
+                  if (this.align === "right") {
+                    this.currentIndex += this.scrollNum;
+                  } else {
+                    this.currentIndex -= this.scrollNum;
+                  }
                 } else {
-                  this.currentIndex += this.scrollNum;
+                  if (this.align === "right") {
+                    this.currentIndex -= this.scrollNum;
+                  } else {
+                    this.currentIndex += this.scrollNum;
+                  }
                 }
                 this.hammer.stop(true);
                 return;
@@ -904,15 +923,23 @@ export class NgxAdvancedCarouselComponent
               const nextIndex = this.currentIndex + moveNum;
 
               if ((this.verticalModeEnabled ? e.deltaY : e.deltaX) > 0) {
-                this.goPrev(prevIndex);
+                this.align === "right"
+                  ? this.goNext(nextIndex)
+                  : this.goPrev(prevIndex);
               } else {
-                this.goNext(nextIndex);
+                this.align === "right"
+                  ? this.goPrev(prevIndex)
+                  : this.goNext(nextIndex);
               }
               break;
             } else if (e.velocityX < -this.swipeVelocity && e.distance > 10) {
-              this.goNext(this.currentIndex + this.scrollNum);
+              this.align === "right"
+                ? this.goPrev(this.currentIndex - this.scrollNum)
+                : this.goNext(this.currentIndex + this.scrollNum);
             } else if (e.velocityX > this.swipeVelocity && e.distance > 10) {
-              this.goPrev(this.currentIndex - this.scrollNum);
+              this.align === "right"
+                ? this.goNext(this.currentIndex + this.scrollNum)
+                : this.goPrev(this.currentIndex - this.scrollNum);
             } else {
               this.drawView(this.currentIndex);
             }
@@ -971,7 +998,7 @@ export class NgxAdvancedCarouselComponent
   ) {
     if (this.elms.length > 1 && this.elms.length > this._showNum) {
       this.removeContainerTransition();
-      this.left = -(index * this.elmWidth - this.alignDistance);
+      this.left = index * this.elmWidth + this.alignDistance;
 
       if (isAnimation) {
         if (isFromAuto) {
