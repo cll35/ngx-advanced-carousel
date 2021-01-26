@@ -592,7 +592,7 @@ export class NgxAdvancedCarouselComponent
           if (this.currentIndex > this.itemElms.length - 1) {
             // i can't pass the changedetection check, only the way to using timeout. :(
             setTimeout(() => {
-              this.currentIndex = this.itemElms.length - 1;
+              this.currentIndex = 0;
             }, 0);
           }
           this.destroy();
