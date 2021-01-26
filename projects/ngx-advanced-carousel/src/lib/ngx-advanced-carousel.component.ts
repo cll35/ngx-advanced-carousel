@@ -189,6 +189,7 @@ export class NgxAdvancedCarouselComponent
         this.drawView(this.currentIndex);
         return;
       }
+      const dir = this._currentIndex>value ? -1 : 1;
       this._currentIndex = value;
       if (this.elms) {
         if (this.autoplay && !this.isFromAuto) {
@@ -220,7 +221,7 @@ export class NgxAdvancedCarouselComponent
                 ? 0
                 : this.elms.length - this._showNum;
           }
-          this.realIndex = this.elms.length;
+          this.realIndex = dir > 0 ? this.elms.length : this.currentIndex;
         }
         this._currentIndex =
           this.currentIndex < 0 && !this.infinite ? 0 : this.currentIndex;
