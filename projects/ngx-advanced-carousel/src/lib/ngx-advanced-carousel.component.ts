@@ -223,8 +223,10 @@ export class NgxAdvancedCarouselComponent
           }
           this.realIndex =
             dir > 0
-              ? Math.ceil(this.currentIndex / this._showNum) >=
-                Math.ceil(this.elms.length / this._showNum)
+              ? Math.ceil(
+                  this.currentIndex / this._showNum +
+                    (this.currentIndex % this._showNum ? 0 : 1)
+                ) >= Math.ceil(this.elms.length / this._showNum)
                 ? this.elms.length
                 : this.currentIndex
               : this.currentIndex;
