@@ -189,7 +189,7 @@ export class NgxAdvancedCarouselComponent
         this.drawView(this.currentIndex);
         return;
       }
-      const dir = this._currentIndex>value ? -1 : 1;
+      const dir = this._currentIndex > value ? -1 : 1;
       this._currentIndex = value;
       if (this.elms) {
         if (this.autoplay && !this.isFromAuto) {
@@ -221,7 +221,13 @@ export class NgxAdvancedCarouselComponent
                 ? 0
                 : this.elms.length - this._showNum;
           }
-          this.realIndex = dir > 0 ? this.elms.length : this.currentIndex;
+          this.realIndex =
+            dir > 0
+              ? Math.ceil(this.currentIndex / this._showNum) >=
+                Math.ceil(this.elms.length / this._showNum)
+                ? this.elms.length
+                : this.currentIndex
+              : this.currentIndex;
         }
         this._currentIndex =
           this.currentIndex < 0 && !this.infinite ? 0 : this.currentIndex;
@@ -318,9 +324,8 @@ export class NgxAdvancedCarouselComponent
           this.containerElm,
           "transform",
           `translateX(${
-            (value +
-            (this.currentIndex !== 0 ? this.padding : 0)) *
-              (this.align === "right" ? -1 : 1)
+            (value + (this.currentIndex !== 0 ? this.padding : 0)) *
+            (this.align === "right" ? -1 : 1)
           }px)`
         );
       } else {
@@ -1063,7 +1068,7 @@ export class NgxAdvancedCarouselComponent
         if (now.gridBy) {
           this.scrollNum = now.gridBy.col || now.scrollNum || now.number;
           this.gridBy = now.gridBy;
-          const showNum = (now.gridBy.col * now.gridBy.row) || now.number;
+          const showNum = now.gridBy.col * now.gridBy.row || now.number;
           return showNum;
         } else {
           this.scrollNum = now.scrollNum || now.number;
