@@ -149,6 +149,8 @@ export class NgxAdvancedCarouselComponent
     return this._autoplay;
   }
   public set autoplay(value) {
+    this._autoplay =
+      this.data && this.data.length > this.showNum ? value : false;
     if (isPlatformBrowser(this.platformId)) {
       if (this.elms) {
         this.progressWidth = 0;
@@ -163,10 +165,10 @@ export class NgxAdvancedCarouselComponent
         }
       }
     }
-    this._autoplay = value;
     // if set autoplay, then the infinite is true
     if (value) {
-      this.infinite = true;
+      this.infinite =
+        this.data && this.data.length > this.showNum ? value : false;
     }
   }
 
@@ -184,7 +186,8 @@ export class NgxAdvancedCarouselComponent
       }
       if (
         !this.itemElms ||
-        (!this.runLoop && !(0 <= value && value <= this.itemElms.length - 1))
+        (!this.runLoop && !(0 <= value && value <= this.itemElms.length - 1) ||
+        (this.data && this.data.length < this._showNum ))
       ) {
         this.drawView(this.currentIndex);
         return;
@@ -596,12 +599,6 @@ export class NgxAdvancedCarouselComponent
       this.itemElms.changes.pipe(
         // detectChanges to change view dots
         tap(() => {
-          if (this.currentIndex > this.itemElms.length - 1) {
-            // i can't pass the changedetection check, only the way to using timeout. :(
-            setTimeout(() => {
-              this.currentIndex = 0;
-            }, 0);
-          }
           this.destroy();
           this.init();
           this.progressWidth = 0;
@@ -745,6 +742,8 @@ export class NgxAdvancedCarouselComponent
         this.currentIndex = this.startIndex;
       }
       this._infineDataCount = this._showNum * 2;
+      this.infinite =
+        this.data && this.data.length > this._showNum ? this.infinite : false;
       this._renderer.addClass(this.containerElm, "grab");
       if (isInit) {
         // remain one elm height
@@ -794,6 +793,8 @@ export class NgxAdvancedCarouselComponent
       this.currentIndex = this.startIndex;
     }
     this._infineDataCount = this._showNum * 2;
+    this.infinite =
+      this.data && this.data.length > this._showNum ? this.infinite : false;
     this._renderer.addClass(this.containerElm, "grab");
     if (isInit) {
       // remain one elm height
