@@ -186,8 +186,8 @@ export class NgxAdvancedCarouselComponent
       }
       if (
         !this.itemElms ||
-        (!this.runLoop && !(0 <= value && value <= this.itemElms.length - 1) ||
-        (this.data && this.data.length < this._showNum ))
+        (!this.runLoop && !(0 <= value && value <= this.itemElms.length - 1)) ||
+        (this.data && this.data.length < this._showNum)
       ) {
         this.drawView(this.currentIndex);
         return;
@@ -246,7 +246,7 @@ export class NgxAdvancedCarouselComponent
               this.currentIndex - this.data.length + this._showNum * 4;
           }
           this._zone.runOutsideAngular(() => {
-            timer(this.aniTime + 100)
+            timer(this.aniTime - this.aniTime / 8)
               .pipe(
                 switchMap(() => {
                   this.drawView(this.currentIndex, false);

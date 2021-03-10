@@ -38,5 +38,8 @@
         }
       }
     }},
-  "defaultProject": "ngx-advanced-carousel"
+  "defaultProject": "ngx-advanced-carousel",
+  "cli": {
+    "analytics": false
+  }
 }

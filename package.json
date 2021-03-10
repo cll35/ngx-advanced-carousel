@@ -1,11 +1,10 @@
 {
   "name": "ngx-advanced-carousel",
-  "version": "0.3.4",
+  "version": "0.3.6",
   "main": "dist/ngx-advanced-carousel.d.ts",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "prepare": "npm run build",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
