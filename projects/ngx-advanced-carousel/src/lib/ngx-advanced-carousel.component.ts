@@ -13,12 +13,14 @@ import {
   Inject,
   Input,
   NgZone,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
   PLATFORM_ID,
   QueryList,
   Renderer2,
+  SimpleChanges,
   TemplateRef,
   ViewChild,
   ViewChildren,
@@ -65,7 +67,7 @@ declare var Hammer;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxAdvancedCarouselComponent
-  implements ControlValueAccessor, AfterViewInit, OnDestroy {
+  implements ControlValueAccessor, AfterViewInit, OnDestroy, OnChanges {
   @Input()
   public get data() {
     return this._data;
@@ -429,6 +431,12 @@ export class NgxAdvancedCarouselComponent
     private _zone: NgZone,
     private _cd: ChangeDetectorRef
   ) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.data) {
+      this.originalData = [];
+    }
+  }
   @ViewChild("containerElm", { static: false }) public container: ElementRef;
   @ViewChildren("viewArea") public viewArea: QueryList<ElementRef>;
   @ViewChild("prev", { static: false }) public btnPrev: ElementRef;
@@ -747,7 +755,6 @@ export class NgxAdvancedCarouselComponent
       this._renderer.addClass(this.containerElm, "grab");
       if (isInit) {
         // remain one elm height
-        this.originalData = [];
         this.initData(this._infineDataCount);
         this._renderer.addClass(
           this.containerElm,
