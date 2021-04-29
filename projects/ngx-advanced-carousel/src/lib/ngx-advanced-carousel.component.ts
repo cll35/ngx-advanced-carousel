@@ -747,6 +747,7 @@ export class NgxAdvancedCarouselComponent
       this._renderer.addClass(this.containerElm, "grab");
       if (isInit) {
         // remain one elm height
+        this.originalData = [];
         this.initData(this._infineDataCount);
         this._renderer.addClass(
           this.containerElm,
